@@ -39,19 +39,25 @@
       font-weight: 700;
     }
     p { margin: 0 0 16px; font-size: 17px; }
-    .project {
-      margin-top: 48px;
-      padding: 24px;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-    }
-    .project h2 {
+    .section-label {
       font-size: 13px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
-      margin: 0 0 12px;
+      margin: 56px 0 16px;
       font-weight: 600;
+    }
+    .project {
+      margin-top: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+    .project h3 {
+      font-size: 22px;
+      margin: 0 0 8px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
     }
     .project p { font-size: 16px; margin: 0 0 12px; }
     .project a.cta {
@@ -76,10 +82,18 @@
     <h1>South Slope Nano Devices</h1>
     <p>South Slope Nano Devices is the nano-lithography arm of Gotham Silicon, a silicon fab operating inside the Columbia Nano Initiative clean room in New York City.</p>
 
+    <h2 class="section-label">Projects</h2>
+
     <div class="project">
-      <h2>Current project</h2>
-      <p><strong>Mosaic</strong> — a 29mm sapphire-and-gold collective disk. 1,124 tiles. File-locks May 24, 2026.</p>
+      <h3>Mosaic</h3>
+      <p>A 29mm sapphire-and-gold collective disk. 1,124 tiles. File-locks May 24, 2026.</p>
       <a class="cta" href="/mosaic.html">See the campaign &rarr;</a>
+    </div>
+
+    <div class="project">
+      <h3>Pi Plate</h3>
+      <p>A 5-inch sapphire plate with the first billion digits of π etched in gold. 750 nanometers per pixel — at the limit of visible light.</p>
+      <a class="cta" href="https://wp.josh.com/2025/10/30/a-billion-digits-of-pi-experiments-in-ultra-microprinting-with-gold-on-sapphire/" target="_blank" rel="noopener">Read the writeup &rarr;</a>
     </div>
 
     <footer>
