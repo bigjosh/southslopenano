@@ -22,7 +22,7 @@
 
 ## Tracking
 
-- Destination URL: `https://southslopenano.com/`
+- Destination URL: `https://southslopenano.com/mosaic.html`
 - Conversion event: an email arriving at `mosaic@southslopenano.com` with subject "Mosaic upload link request" — the landing-page form opens the user's email client with these prefilled.
 - Cost-per-submission: count emails-in / day-spend. Reddit's UI gives clicks; CTR is direct. The form-submit-to-mailto handoff isn't trackable server-side without a thank-you page firing a Reddit pixel. v1 measure of truth is Josh's inbox.
 
