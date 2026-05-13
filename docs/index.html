@@ -104,8 +104,9 @@
       outline: 2px solid var(--accent);
       outline-offset: -1px;
     }
-    button {
-      padding: 14px 24px;
+    .cta-button {
+      display: inline-block;
+      padding: 14px 28px;
       background: var(--accent);
       color: #000;
       border: none;
@@ -114,8 +115,9 @@
       cursor: pointer;
       border-radius: 4px;
       font-family: inherit;
+      text-decoration: none;
     }
-    button:hover { opacity: 0.9; }
+    .cta-button:hover { opacity: 0.9; text-decoration: none; }
     .fine {
       font-size: 14px;
       color: var(--muted);
@@ -151,13 +153,13 @@
     </p>
 
     <h2>Claim a tile.</h2>
-    <p>Upload is free. Drop your email and we'll send you a link to upload a 500×500 monochrome image — anything you can express in pixels. Your image joins the collective disk; every contributor's image appears on every disk.</p>
+    <p>Upload is free. You send a 500×500 monochrome image — anything you can express in pixels. Your image joins the collective disk; every contributor's image appears on every disk.</p>
 
-    <form id="email-form" action="mailto:mosaic@southslopenano.com?subject=Mosaic%20upload%20link%20request" method="POST" enctype="text/plain">
-      <input type="email" id="email-input" name="email" required placeholder="you@example.com" autocomplete="email">
-      <button type="submit">Send me an upload link</button>
-    </form>
-    <p id="form-status" class="fine" hidden></p>
+    <p>To request an upload link, send us an email. In the body, briefly mention what you plan to upload. This is mostly for spam control, but we're also curious what people are working on.</p>
+
+    <p style="text-align: center; margin: 24px 0;">
+      <a class="cta-button" href="mailto:mosaic@southslopenano.com?subject=Mosaic%20upload%20link%20request&body=I%20plan%20to%20upload%3A%20">Send your email request</a>
+    </p>
 
     <p class="fine">If you want the physical disk afterward, it's $150 — but uploading doesn't require buying. Every contributor gets the same finished object regardless.</p>
 
@@ -198,18 +200,6 @@
         console.warn('Tile count fetch failed:', e);
       }
     })();
-
-    document.getElementById('email-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = document.getElementById('email-input').value.trim();
-      if (!email) return;
-      const subject = encodeURIComponent('Mosaic upload link request');
-      const body = encodeURIComponent('Please send my Mosaic upload link.\n\nEmail: ' + email + '\n');
-      window.location.href = 'mailto:mosaic@southslopenano.com?subject=' + subject + '&body=' + body;
-      const status = document.getElementById('form-status');
-      status.hidden = false;
-      status.innerHTML = 'Your email client should have opened — just hit send. If nothing opened, email <a href="mailto:mosaic@southslopenano.com?subject=Mosaic%20upload%20link%20request">mosaic@southslopenano.com</a> directly.';
-    });
   </script>
 </body>
 </html>
