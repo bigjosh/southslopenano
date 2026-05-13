@@ -14,10 +14,10 @@
 - **Free uploads since campaign start:** 0 (campaign hasn't started)
 - **South Slope Nano Devices brand:** exists on Stripe; `southslopenano.com` registered by Josh; DNS pointing pending.
 - **Product name:** **Mosaic**. Hostname for the upload flow: `mosaic.southslopenano.com`.
-- **`claim.html`:** written, committed to repo, NOT yet pointed at by any traffic. Still contains `[FILE-LOCK DATE]` placeholders pending search-replace.
-- **Landing page:** not built. Will be served by GH Pages from `docs/` to `southslopenano.com`. Placeholder `docs/index.html` in tree so the GH Pages pipeline can be verified end-to-end before the real page lands.
-- **Email gate:** retained. Funnel = `southslopenano.com` → email → emailed upload link → `mosaic.southslopenano.com/upload/claim.html`. No changes to existing upload pipeline.
-- **Campaign repo:** this directory is now a git repo (initialized 2026-05-13). No GitHub remote yet.
+- **`claim.html`:** migrated into `docs/upload/claim.html` in this repo. All API calls now absolute to `https://mosaic.southslopenano.com/upload/cgi-bin/app.py`. File-lock date set to May 24, 2026. CW&T-domain leaks removed. Will be served from `https://southslopenano.com/upload/claim.html?code=...` once pushed.
+- **Landing page:** not yet drafted. GH Pages is now wired up and serving `docs/` to `southslopenano.com`. Placeholder `docs/index.html` remains until the real landing page is drafted (next action).
+- **Email gate:** retained. Funnel = `southslopenano.com` → email → emailed upload link → `southslopenano.com/upload/claim.html?code=...` (our migrated copy; cross-origin API calls to `mosaic.southslopenano.com` are CORS-greenlit).
+- **Campaign repo:** `https://github.com/bigjosh/southslopenano` (public). Initial commit pushed 2026-05-13. GH Pages config pending Josh (Settings → Pages → main / `docs`).
 - **Outbound marketing email:** killed for this campaign. Paid ads replace it.
 
 ---
@@ -32,6 +32,10 @@ See `DECISIONS_QUEUE.md` for the full list. Top items:
 
 ## What's done
 
+- `claim.html` migrated from the cwandt repo into `docs/upload/claim.html`. 12 spots rewritten: 3 fetch API URLs absolutized to `https://mosaic.southslopenano.com/upload/cgi-bin/app.py`; 2 `window.location.origin` hardcoded; 3 asset/link URLs absolutized (`style.css`, `disk.png`, viewer link); 1 `[FILE-LOCK DATE]` placeholder replaced with `May 24, 2026`; CW&T-branded guide link dropped; `pf.cwandt.com` mention in honest-notes redirected to `mosaic.southslopenano.com`. Verified no cwandt/pocketfiche references remain and no relative URLs left.
+- GH Pages live: `bigjosh/southslopenano` serves `docs/` to `southslopenano.com` (Josh configured 2026-05-13). Placeholder `docs/index.html` is what's currently served; will be replaced by the real landing page.
+- Campaign repo published as `bigjosh/southslopenano` (public, 2026-05-13). Initial commit contains CLAUDE.md, STATE.md, DECISIONS_QUEUE.md, `docs/index.html` placeholder, `.gitignore`.
+- CORS header (`Access-Control-Allow-Origin: *`) live on the `mosaic.southslopenano.com` upload server. Verified by direct GET + OPTIONS preflight — both return correct CORS headers. Cross-origin calls from a future `claim.html` hosted on `southslopenano.com` will work.
 - Product named **Mosaic** (2026-05-13). Upload-flow subdomain renamed to `mosaic.southslopenano.com` (supersedes the earlier `upload.southslopenano.com` plan from same day). CLAUDE.md updated to reflect.
 - Domain `southslopenano.com` registered by Josh (2026-05-13). Matches Stripe LLC descriptor.
 - Campaign repo initialized in this directory (`pf-campaign`). `docs/` scaffolded with a placeholder `index.html` so GH Pages can be verified end-to-end before the real landing page lands. `.gitignore` in place. No commits yet — Josh's call when to commit.
@@ -93,6 +97,12 @@ See `DECISIONS_QUEUE.md` for the full list. Top items:
 ---
 
 ## Decision log (append-only, newest on top)
+
+**2026-05-13** — `claim.html` migration executed. Lives at `docs/upload/claim.html` in this repo, served via GH Pages at `southslopenano.com/upload/claim.html`. API calls go cross-origin to `mosaic.southslopenano.com`; CORS allows it. Removed the CW&T-branded guide link entirely; pointed honest-notes viewer mention at `mosaic.southslopenano.com` instead of `pf.cwandt.com`. Note: the viewer at `mosaic.southslopenano.com` still has CW&T banner branding — separate decision pending Josh (edit cwandt viewer repo / drop the link / live with it).
+
+**2026-05-13** — Campaign repo published as `bigjosh/southslopenano` (public). Initial commit pushed. Picked over `bigjosh/mosaic` and `bigjosh/pf-campaign`; domain-matched name is most legible publicly.
+
+**2026-05-13** — `claim.html` will move into this repo's `docs/upload/claim.html` rather than staying in the cwandt repo. Enabled by Josh adding `Access-Control-Allow-Origin: *` on the `mosaic.southslopenano.com` upload server. Five rewrites needed in `claim.html` when migrating: 3 relative fetch URLs → absolute (`https://mosaic.southslopenano.com/upload/cgi-bin/app.py...`), 2 `window.location.origin` refs → hardcoded `https://mosaic.southslopenano.com`. Stale-fact: STATE.md previously named branch `claim-page-rewrite` in cwandt repo — that branch doesn't exist; `claim.html` is on `main`. Migration path replaces the PR-to-cwandt-repo workflow entirely.
 
 **2026-05-13** — Product named **Mosaic**. Subdomain for upload flow is `mosaic.southslopenano.com` (supersedes the earlier `upload.southslopenano.com` plan from same day; Josh now wires the hostname based on product name). Picked over Cairn (esoteric / hard to spell), Wafer (semiconductor-honest but less audience-resonant), Quilt, and Slate. Audience resonance with pixel-art primary ring was the tiebreaker.
 
