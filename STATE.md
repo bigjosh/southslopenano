@@ -15,7 +15,7 @@
 - **South Slope Nano Devices brand:** exists on Stripe; `southslopenano.com` registered by Josh; DNS pointing pending.
 - **Product name:** **Mosaic**. Hostname for the upload flow: `mosaic.southslopenano.com`.
 - **`claim.html`:** migrated into `docs/upload/claim.html` in this repo. All API calls now absolute to `https://mosaic.southslopenano.com/upload/cgi-bin/app.py`. File-lock date set to May 24, 2026. CW&T-domain leaks removed. Will be served from `https://southslopenano.com/upload/claim.html?code=...` once pushed.
-- **Landing page:** first draft at `docs/index.html`. Replaces the placeholder. Above the fold: live tile counter (fetches `mosaic.southslopenano.com`), file-lock deadline, email-collection form. Below: fabrication story and honest-notes. Form `action` is a placeholder (`[EMAIL_ENDPOINT]`) — non-functional until Josh picks a submission mechanism. Page is otherwise launch-ready.
+- **Landing page:** drafted at `docs/index.html` and wired with a mailto form to `mosaic@southslopenano.com` (subject "Mosaic upload link request"). User's typed email is placed in the message body. Functional end-to-end pending Josh setting up the mailbox. Above the fold: live tile counter, file-lock deadline, mailto form. Below: fabrication story, honest-notes.
 - **Email gate:** retained. Funnel = `southslopenano.com` → email → emailed upload link → `southslopenano.com/upload/claim.html?code=...` (our migrated copy; cross-origin API calls to `mosaic.southslopenano.com` are CORS-greenlit).
 - **Campaign repo:** `https://github.com/bigjosh/southslopenano` (public). Initial commit pushed 2026-05-13. GH Pages config pending Josh (Settings → Pages → main / `docs`).
 - **Outbound marketing email:** killed for this campaign. Paid ads replace it.
@@ -32,7 +32,8 @@ See `DECISIONS_QUEUE.md` for the full list. Top items:
 
 ## What's done
 
-- Landing page drafted at `docs/index.html` — replaces the placeholder. Live tile counter, scarcity sentence with real date, hero (disk render), email-collection form (placeholder action), fabrication story, honest-notes section. Form action is `[EMAIL_ENDPOINT]` pending Josh's choice of submission mechanism. Open Graph / Twitter card meta tags included.
+- Landing page drafted at `docs/index.html` — replaces the placeholder. Live tile counter, scarcity sentence with real date, hero (disk render), email-collection form, fabrication story, honest-notes. Open Graph / Twitter card meta tags included.
+- Email-collection mechanism: mailto. Form opens user's default email client with To=`mosaic@southslopenano.com`, Subject="Mosaic upload link request", Body containing the typed email address. Josh receives, manually sends back upload link via existing pipeline. Cheap v1; iterate if conversion is poor or volume hits manual-bottleneck.
 - Reddit Promoted Post creatives drafted at `copy/ads/reddit/`. 3 angles × 2 variants = 6 ads, plus a README with the test plan and subreddit lists. Angles: (1) "your tile on a sapphire disk" for pixel-art audiences, (2) "1,124 hard cap, file-locks May 24" for scarcity-driven collectors, (3) "semiconductor fab as art press" for engineers/makers. Ready to feed into Reddit ad UI once Josh greenlights the run and an ad account is set up.
 - `claim.html` migrated from the cwandt repo into `docs/upload/claim.html`. 12 spots rewritten: 3 fetch API URLs absolutized to `https://mosaic.southslopenano.com/upload/cgi-bin/app.py`; 2 `window.location.origin` hardcoded; 3 asset/link URLs absolutized (`style.css`, `disk.png`, viewer link); 1 `[FILE-LOCK DATE]` placeholder replaced with `May 24, 2026`; CW&T-branded guide link dropped; `pf.cwandt.com` mention in honest-notes redirected to `mosaic.southslopenano.com`. Verified no cwandt/pocketfiche references remain and no relative URLs left.
 - GH Pages live: `bigjosh/southslopenano` serves `docs/` to `southslopenano.com` (Josh configured 2026-05-13). Placeholder `docs/index.html` is what's currently served; will be replaced by the real landing page.
@@ -99,6 +100,8 @@ See `DECISIONS_QUEUE.md` for the full list. Top items:
 ---
 
 ## Decision log (append-only, newest on top)
+
+**2026-05-13** — Email-collection mechanism chosen: mailto to `mosaic@southslopenano.com` with subject "Mosaic upload link request". User types their email into the landing-page form; on submit, a JS handler opens their email client prefilled. Josh sees inbound emails, manually sends upload links via the existing pipeline. Picked over third-party form services and a custom backend endpoint because: zero new infrastructure, easy to iterate on if it underperforms. Conversion tracking is "count inbox / count spend"; Reddit pixel-based tracking would require a thank-you page (deferred).
 
 **2026-05-13** — Landing page and Reddit ad creatives drafted. Landing page at `docs/index.html` (replaces placeholder); ad creatives at `copy/ads/reddit/` (6 variants across 3 angles). Both pending Josh's review. Landing page is blocked from real traffic until the email-collection endpoint is chosen and wired (new DECISIONS_QUEUE entry).
 
