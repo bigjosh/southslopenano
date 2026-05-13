@@ -23,6 +23,8 @@ Scarcity + deadline lead. The "one of N" collector psychology. Activates urgency
 
 **Link card subtitle:** Each tile is a 500×500 image. Identical disk for every contributor. Public viewer forever.
 
+**Destination URL:** `https://southslopenano.com/sapphire.html` (recipient: `sapphire@`)
+
 **Notes:** Three facts, in order: total cap, remaining, deadline. Numbers carry the weight.
 
 ---
@@ -34,5 +36,7 @@ Scarcity + deadline lead. The "one of N" collector psychology. Activates urgency
 **Image:** "May 24, 2026" displayed prominently. Disk render to the side.
 
 **Link card subtitle:** A 29mm sapphire disk, etched in gold by semiconductor lithography. One run. Then never again.
+
+**Destination URL:** `https://southslopenano.com/lockin.html` (recipient: `lockin@`)
 
 **Notes:** Deadline-first. "Then never again" is the line that should stick. The "11 days" number decays — refresh the creative as the date approaches (10 days, 7 days, 3 days).

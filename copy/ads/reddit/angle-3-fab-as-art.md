@@ -23,6 +23,8 @@ Technical-romantic. Speaks to engineers, makers, hardware hackers, semiconductor
 
 **Link card subtitle:** 1,124 monochrome 500×500 bitmaps, etched in gold on sapphire. One run, locks May 24.
 
+**Destination URL:** `https://southslopenano.com/foundry.html` (recipient: `foundry@`)
+
 **Notes:** Technical audience will read this and want to know more. The novelty of the process IS the pitch.
 
 ---
@@ -34,5 +36,7 @@ Technical-romantic. Speaks to engineers, makers, hardware hackers, semiconductor
 **Image:** Silicon wafer + Mosaic disk, side by side.
 
 **Link card subtitle:** 1,124 tiles. Upload one image. Locks May 24. $150 for the physical disk; uploading is free.
+
+**Destination URL:** `https://southslopenano.com/etch.html` (recipient: `etch@`)
 
 **Notes:** Compare to a known process. Reframes industrial tech as artistic medium. Engineers respond to "here's a familiar thing repurposed."

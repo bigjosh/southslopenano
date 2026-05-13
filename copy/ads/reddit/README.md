@@ -22,9 +22,10 @@
 
 ## Tracking
 
-- Destination URL: `https://southslopenano.com/mosaic.html`
-- Conversion event: an email arriving at `mosaic@southslopenano.com` with subject "Mosaic upload link request" — the landing-page form opens the user's email client with these prefilled.
-- Cost-per-submission: count emails-in / day-spend. Reddit's UI gives clicks; CTR is direct. The form-submit-to-mailto handoff isn't trackable server-side without a thank-you page firing a Reddit pixel. v1 measure of truth is Josh's inbox.
+- Destination URL: per-variant. Each ad points at a different landing-page slug under `southslopenano.com`, and each slug bakes in a different mailto recipient. See each angle file for the variant→URL→recipient mapping.
+- Conversion event: an email arriving at a variant address (e.g., `tile@`, `pixel@`...) under the `southslopenano.com` catch-all, with subject "Mosaic upload link request".
+- Attribution: the To: header of inbound email tells you which ad variant generated it. No analytics tool, no UTM codes, no JS.
+- Cost-per-submission: count emails per variant address / day-spend per variant. Reddit's UI gives clicks; CTR is direct.
 
 ## Hard rules (from CLAUDE.md)
 

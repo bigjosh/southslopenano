@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mosaic — a sapphire-and-gold disk</title>
+  <meta name="description" content="A 29mm sapphire disk, etched in gold by semiconductor lithography. 1,124 tiles. File-locks May 24, 2026.">
+  <meta name="referrerpolicy" content="no-referrer">
+
+  <!-- Open Graph / social previews -->
+  <meta property="og:title" content="Mosaic — a sapphire-and-gold disk">
+  <meta property="og:description" content="A 29mm sapphire disk, etched in gold by semiconductor lithography. 1,124 tiles. File-locks May 24, 2026.">
+  <meta property="og:image" content="https://mosaic.southslopenano.com/upload/disk.png">
+  <meta property="og:url" content="https://southslopenano.com/foundry.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --fg: #eee;
+      --muted: #888;
+      --accent: #00ffff;
+      --border: #333;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, system-ui, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 56px 24px 64px;
+    }
+    h1 {
+      font-size: 56px;
+      letter-spacing: -0.03em;
+      margin: 0 0 8px;
+      font-weight: 700;
+    }
+    p.tagline {
+      font-size: 18px;
+      color: var(--muted);
+      margin: 0 0 32px;
+    }
+    h2 {
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      margin: 40px 0 12px;
+      font-weight: 600;
+    }
+    p { margin: 0 0 16px; }
+    strong.accent { color: var(--accent); font-weight: 600; }
+    hr {
+      border: none;
+      border-top: 1px solid var(--accent);
+      margin: 40px 0;
+    }
+    .hero-img {
+      display: block;
+      width: 240px;
+      max-width: 100%;
+      margin: 24px auto 32px;
+    }
+    .counter {
+      text-align: center;
+      font-size: 16px;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+    .counter .filled { color: var(--accent); font-weight: 600; }
+    .deadline {
+      display: inline-block;
+      padding: 2px 10px;
+      background: rgba(0, 255, 255, 0.1);
+      color: var(--accent);
+      font-weight: 600;
+      border-radius: 3px;
+      font-size: 14px;
+      letter-spacing: 0.01em;
+    }
+    form {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 16px 0 12px;
+    }
+    input[type="email"] {
+      flex: 1 1 220px;
+      min-width: 0;
+      padding: 14px 16px;
+      background: #111;
+      border: 1px solid var(--border);
+      color: var(--fg);
+      font-size: 16px;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+    input[type="email"]:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: -1px;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 4px;
+      font-family: inherit;
+      text-decoration: none;
+    }
+    .cta-button:hover { opacity: 0.9; text-decoration: none; }
+    .fine {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    ul { padding-left: 20px; }
+    ul li { margin-bottom: 8px; font-size: 15px; color: #ccc; }
+    footer {
+      margin-top: 64px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+    a { color: var(--accent); }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Mosaic</h1>
+    <p class="tagline">A 29mm sapphire disk, etched in gold by semiconductor lithography. 1,124 tiles. One physical run.</p>
+
+    <img class="hero-img" src="https://mosaic.southslopenano.com/upload/disk.png" alt="The Mosaic disk">
+
+    <p class="counter">
+      <span class="filled" id="filled-count">…</span> of 1,124 tiles filled.
+      <span id="remaining-count">…</span> remain.
+    </p>
+
+    <p style="text-align: center; margin-bottom: 32px;">
+      File locks on <span class="deadline">May 24, 2026</span>. After that the disk goes to fabrication and the contents are permanent.
+    </p>
+
+    <h2>Claim a tile.</h2>
+    <p>Upload is free. You send a 500×500 monochrome image — anything you can express in pixels. Your image joins the collective disk; every contributor's image appears on every disk.</p>
+
+    <p>To request an upload link, send us an email. In the body, briefly mention what you plan to upload. This is mostly for spam control, but we're also excited to hear your ideas!</p>
+
+    <p style="text-align: center; margin: 24px 0;">
+      <a class="cta-button" href="mailto:foundry@southslopenano.com?subject=Mosaic%20upload%20link%20request&body=I%20plan%20to%20upload%3A%20">Send your email request</a>
+    </p>
+
+    <p class="fine">If you want the physical disk afterward, it's $150 — but uploading doesn't require buying. Every contributor gets the same finished object regardless.</p>
+
+    <hr>
+
+    <h2>What's actually happening</h2>
+    <p>South Slope Nano Devices is fabricating one run of a 29mm sapphire disk. Each tile is a 500×500 monochrome bitmap. The bitmaps are etched in gold using the same semiconductor lithography used to make microchips. The result is too small to read with the naked eye — you can see something is etched on the disk, but the individual tiles need a microscope.</p>
+
+    <p>The full-resolution contents always live publicly at <a href="https://mosaic.southslopenano.com" target="_blank" rel="noopener">mosaic.southslopenano.com</a>. That's the canonical way to read what's on the disk. The physical object is the souvenir.</p>
+
+    <h2>Honest notes</h2>
+    <ul>
+      <li>The disk is too small to read with the naked eye. Get a microscope, or use the public viewer.</li>
+      <li>Every contributor receives an <strong class="accent">identical</strong> disk — every image, on the same coin.</li>
+      <li>The public viewer at <a href="https://mosaic.southslopenano.com" target="_blank" rel="noopener">mosaic.southslopenano.com</a> is permanent. Don't upload anything you wouldn't be comfortable being seen forever. We also expect the physical disks to be around for the next 10,000 years.</li>
+      <li>We review every upload before fabrication. Anything we wouldn't want next to our own image gets bounced.</li>
+      <li>Hard cap of 1,124 tiles. When May 24 hits, the file locks. Then never again from this team.</li>
+    </ul>
+
+    <footer>
+      South Slope Nano Devices, LLC
+    </footer>
+  </main>
+
+  <script>
+    (async function updateCounts() {
+      try {
+        const res = await fetch('https://mosaic.southslopenano.com/upload/cgi-bin/app.py?command=get-parcels');
+        const data = await res.json();
+        if (data.status === 'success' && Array.isArray(data.parcels)) {
+          const total = 1124;
+          const filled = data.parcels.length;
+          const remaining = total - filled;
+          document.getElementById('filled-count').textContent = filled.toLocaleString();
+          document.getElementById('remaining-count').textContent = remaining.toLocaleString();
+        }
+      } catch (e) {
+        console.warn('Tile count fetch failed:', e);
+      }
+    })();
+  </script>
+</body>
+</html>

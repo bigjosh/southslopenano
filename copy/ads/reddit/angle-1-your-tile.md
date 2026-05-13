@@ -23,6 +23,8 @@ Direct pitch. Speaks to people who already think in tiles (pixel art, r/place na
 
 **Link card subtitle:** Upload free, $150 for the physical disk. 1,124 hard cap. Locks May 24.
 
+**Destination URL:** `https://southslopenano.com/tile.html` (recipient: `tile@`)
+
 **Notes:** Lead with the technical fact. The visual sells the form factor; the title sells the process.
 
 ---
@@ -34,5 +36,7 @@ Direct pitch. Speaks to people who already think in tiles (pixel art, r/place na
 **Image:** Parcels-grid screenshot, one tile highlighted.
 
 **Link card subtitle:** Upload free. Disk locks May 24. ~906 of 1,124 tiles left.
+
+**Destination URL:** `https://southslopenano.com/pixel.html` (recipient: `pixel@`)
 
 **Notes:** Lean on r/place analogy explicitly. Pixel-art crowd will get it instantly. "But it ships" is the differentiator vs. ephemeral canvas projects.
