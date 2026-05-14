@@ -1,0 +1,17 @@
+{
+  "imap_host": "mail.josh.com",
+  "imap_port": 993,
+  "imap_user": "mosaic@southslopenano.com",
+  "imap_pass": "REPLACE_ME",
+
+  "smtp_host": "mail.josh.com",
+  "smtp_port": 465,
+  "smtp_user": "mosaic@southslopenano.com",
+  "smtp_pass": "REPLACE_ME",
+  "smtp_from": "Mosaic <mosaic@southslopenano.com>",
+
+  "admin_id": "REPLACE_ME",
+  "generate_code_url": "https://mosaic.southslopenano.com/upload/cgi-bin/app.py",
+
+  "port": 5000
+}

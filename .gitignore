@@ -5,3 +5,12 @@ desktop.ini
 .idea/
 *.swp
 node_modules/
+
+# Inbox tool — local config holds creds
+tools/inbox/config.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

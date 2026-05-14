@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Reply to {{ msg.from_addr }}{% endblock %}
+{% block body %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 m-0">Reply with code <span class="accent">{{ code }}</span></h1>
+    <a href="/" class="btn btn-sm btn-outline-light">Cancel</a>
+  </div>
+
+  <div class="msg-card p-3 mb-4">
+    <div class="small-mono mb-1">they wrote:</div>
+    <div><strong>{{ msg.from_name or msg.from_addr }}</strong>
+      <span class="small-mono">&lt;{{ msg.from_addr }}&gt;</span></div>
+    <div class="small-mono">to: {{ msg.to_addr }} &middot; {{ msg.date }}</div>
+    <div class="mt-1"><span class="text-secondary">subject:</span> {{ msg.subject }}</div>
+    {% if msg.body %}
+      <hr class="my-2">
+      <div class="msg-body">{{ msg.body }}</div>
+    {% endif %}
+  </div>
+
+  <form method="POST" action="{{ url_for('send_view', uid=msg.uid) }}">
+    <div class="mb-3">
+      <label class="form-label small-mono">To</label>
+      <input type="email" name="to" value="{{ msg.from_addr }}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label small-mono">Subject</label>
+      <input type="text" name="subject" value="{{ subject }}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label small-mono">Body (edit before sending if you want)</label>
+      <textarea name="body" class="form-control code-edit" required>{{ body }}</textarea>
+    </div>
+    <input type="hidden" name="in_reply_to" value="{{ msg.message_id }}">
+    <input type="hidden" name="references" value="{{ msg.references or msg.message_id }}">
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-cyan btn-lg">Send &amp; mark handled</button>
+      <a href="/" class="btn btn-outline-light btn-lg">Cancel</a>
+    </div>
+  </form>
+{% endblock %}

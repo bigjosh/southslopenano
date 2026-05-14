@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Mosaic inbox — {{ pending|length }} pending{% endblock %}
+{% block body %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 m-0">Pending requests <span class="text-secondary">({{ pending|length }})</span></h1>
+    <a href="/" class="btn btn-sm btn-outline-light">Refresh</a>
+  </div>
+
+  {% if error %}
+    <div class="alert alert-danger">
+      <strong>Failed to fetch inbox.</strong><br>
+      <span class="small-mono">{{ error }}</span>
+    </div>
+  {% endif %}
+
+  {% if not pending and not error %}
+    <p class="text-secondary">No unread requests. Nice.</p>
+  {% endif %}
+
+  {% for m in pending %}
+    <div class="msg-card p-3 mb-3">
+      <div class="d-flex justify-content-between align-items-start">
+        <div>
+          <div><strong>{{ m.from_name or m.from_addr }}</strong>
+            <span class="small-mono">&lt;{{ m.from_addr }}&gt;</span></div>
+          <div class="small-mono">to: {{ m.to_addr }} &middot; {{ m.date }}</div>
+          <div class="mt-1"><span class="text-secondary">subject:</span> {{ m.subject }}</div>
+        </div>
+        <a href="{{ url_for('compose_view', uid=m.uid) }}" class="btn btn-cyan">Reply with link &rarr;</a>
+      </div>
+      {% if m.body %}
+        <hr class="my-2">
+        <div class="msg-body">{{ m.body }}</div>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endblock %}
