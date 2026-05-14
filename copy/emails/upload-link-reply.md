@@ -25,7 +25,7 @@ Sent to users who emailed one of the variant addresses (`request@`, `signup@`, e
 > - One image per link, 500×500, monochrome. We'll convert anything else as best we can.
 > - We review every upload before fabrication. If anything needs adjustment we'll send it back with a note.
 > - The disk locks for fabrication on May 24, 2026.
-> - Every contributor receives an identical sapphire-and-gold coin — every image, on the same disk. The public viewer at https://mosaic.southslopenano.com is permanent.
+> - The public viewer at https://mosaic.southslopenano.com is permanent — your image lives there regardless of whether you buy a disk.
 > - The physical disk is $150 if you want one, but the upload doesn't require buying. The buy button is on the claim page after you upload.
 >
 > If anything breaks or the link doesn't work, just reply.
