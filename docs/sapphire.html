@@ -18,57 +18,62 @@
   <style>
     :root {
       --bg: #0a0a0a;
-      --fg: #eee;
-      --muted: #888;
+      --fg: #f1f1f1;
+      --muted: #a8a8a8;
       --accent: #00ffff;
       --border: #333;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
-    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      font-size: 18px;
+    }
     body {
       background: var(--bg);
       color: var(--fg);
       font-family: -apple-system, system-ui, "Segoe UI", sans-serif;
-      line-height: 1.55;
+      line-height: 1.6;
       font-size: 1.25rem;
     }
     main {
       max-width: 680px;
       margin: 0 auto;
-      padding: 48px 24px 64px;
+      padding: 40px 20px 56px;
     }
     h1 {
-      font-size: clamp(2.75rem, 10vw, 4rem);
+      font-size: clamp(3rem, 11vw, 4.5rem);
       letter-spacing: -0.03em;
       margin: 0 0 12px;
       font-weight: 700;
-      line-height: 1.1;
+      line-height: 1.05;
     }
     p.tagline {
-      font-size: 1.375rem;
+      font-size: 1.3125rem;
       color: var(--muted);
-      margin: 0 0 32px;
-      line-height: 1.5;
+      margin: 0 0 28px;
+      line-height: 1.45;
     }
     h2 {
-      font-size: 1.625rem;
+      font-size: 1.75rem;
       letter-spacing: -0.01em;
-      margin: 40px 0 12px;
+      margin: 32px 0 12px;
       font-weight: 600;
+      line-height: 1.25;
     }
-    p { margin: 0 0 20px; }
+    p { margin: 0 0 18px; font-size: 1.1875rem; }
     strong.accent { color: var(--accent); font-weight: 600; }
     hr {
       border: none;
       border-top: 1px solid var(--accent);
-      margin: 40px 0;
+      margin: 36px 0;
     }
     .hero-img {
       display: block;
       width: 260px;
       max-width: 100%;
-      margin: 24px auto 32px;
+      margin: 20px auto 28px;
     }
     .counter {
       text-align: center;
@@ -84,7 +89,7 @@
       color: var(--accent);
       font-weight: 600;
       border-radius: 3px;
-      font-size: 1rem;
+      font-size: 1.0625rem;
       letter-spacing: 0.01em;
     }
     .cta-button {
@@ -104,22 +109,30 @@
     .fine {
       font-size: 1.0625rem;
       color: var(--muted);
+      line-height: 1.55;
     }
-    ul { padding-left: 24px; }
-    ul li { margin-bottom: 14px; font-size: 1.1875rem; color: #ddd; line-height: 1.55; }
+    ul { padding-left: 24px; margin: 0 0 20px; }
+    ul li {
+      margin-bottom: 14px;
+      font-size: 1.1875rem;
+      color: #e6e6e6;
+      line-height: 1.6;
+    }
     footer {
-      margin-top: 64px;
+      margin-top: 56px;
       padding-top: 16px;
       border-top: 1px solid var(--border);
       color: var(--muted);
-      font-size: 0.9375rem;
+      font-size: 1rem;
       text-align: center;
     }
     a { color: var(--accent); }
     a:hover { text-decoration: underline; }
     @media (max-width: 520px) {
-      main { padding: 32px 18px 48px; }
-      h2 { margin: 32px 0 10px; }
+      main { padding: 24px 14px 40px; }
+      h1 { letter-spacing: -0.02em; }
+      h2 { margin: 28px 0 10px; }
+      hr { margin: 28px 0; }
     }
   </style>
 </head>
@@ -135,7 +148,7 @@
       <span id="remaining-count">…</span> remain.
     </p>
 
-    <p style="text-align: center; margin-bottom: 32px;">
+    <p style="text-align: center; margin-bottom: 28px;">
       File locks on <span class="deadline">May 24, 2026</span>. After that the disk goes to fabrication and the contents are permanent.
     </p>
 
@@ -144,7 +157,7 @@
 
     <p>To request an upload link, send us an email. In the body, briefly mention what you plan to upload. This is mostly for spam control, but we're also excited to hear your ideas.</p>
 
-    <p style="text-align: center; margin: 24px 0;">
+    <p style="text-align: center; margin: 20px 0;">
       <a class="cta-button" href="mailto:sapphire@southslopenano.com?subject=Mosaic%20upload%20link%20request&body=I%20plan%20to%20upload%3A%20">Send your email request</a>
     </p>
 
