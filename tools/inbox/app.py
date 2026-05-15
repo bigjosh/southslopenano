@@ -24,11 +24,58 @@ import re
 import smtplib
 import ssl
 from email.message import EmailMessage
-from email.utils import getaddresses, parseaddr, formatdate, make_msgid
+from email.utils import formatdate, make_msgid, parseaddr
+from html.parser import HTMLParser
 from pathlib import Path
 
 import requests
 from flask import Flask, render_template, request, redirect, url_for, flash
+
+
+# ----------------------------------------------------------------------------
+# HTML -> plain text
+# ----------------------------------------------------------------------------
+
+_BLOCK_TAGS = {"br", "p", "li", "div", "tr", "h1", "h2", "h3", "h4", "h5", "h6"}
+_SKIP_TAGS = {"script", "style", "head", "title"}
+
+
+class _HTMLToText(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.parts = []
+        self._skip_depth = 0
+
+    def handle_starttag(self, tag, attrs):
+        tag = tag.lower()
+        if tag in _SKIP_TAGS:
+            self._skip_depth += 1
+        elif tag in _BLOCK_TAGS and self._skip_depth == 0:
+            self.parts.append("\n")
+
+    def handle_endtag(self, tag):
+        tag = tag.lower()
+        if tag in _SKIP_TAGS:
+            self._skip_depth = max(0, self._skip_depth - 1)
+        elif tag in _BLOCK_TAGS and self._skip_depth == 0:
+            self.parts.append("\n")
+
+    def handle_data(self, data):
+        if self._skip_depth == 0:
+            self.parts.append(data)
+
+    def get_text(self):
+        text = "".join(self.parts)
+        text = re.sub(r"[ \t]+", " ", text)
+        text = re.sub(r"\n\s*\n+", "\n\n", text)
+        return text.strip()
+
+
+def html_to_text(s):
+    p = _HTMLToText()
+    p.feed(s)
+    p.close()
+    return p.get_text()
 
 
 HERE = Path(__file__).resolve().parent
@@ -64,9 +111,10 @@ CONFIG = load_config()
 def read_reply_template():
     """Pull `## Subject` and `## Body` out of the markdown template.
 
-    Each section is a blockquote (lines starting with `> `). We strip the
-    blockquote prefix and join. Blank quoted lines (`>` only) become real
-    blank lines in the output.
+    Each section is a blockquote (lines starting with `> `). Blank lines
+    OUTSIDE blockquotes are tolerated (markdown allows whitespace between
+    a heading and its blockquote) and don't end the section. Only a new
+    `## ` heading or a non-quote non-blank line ends it.
     """
     text = TEMPLATE_PATH.read_text(encoding="utf-8")
     subject_lines, body_lines = [], []
@@ -88,8 +136,11 @@ def read_reply_template():
             line = stripped[2:]
         elif stripped == ">":
             line = ""
+        elif stripped == "":
+            # Blank lines don't end the section — markdown often puts one
+            # between a heading and its blockquote.
+            continue
         else:
-            # Non-quote line ends the current quoted block.
             section = None
             continue
         if section == "subject":
@@ -118,41 +169,43 @@ def _decode_payload(part):
 
 
 def _extract_body(msg):
+    """Return plain text for display. Prefer text/plain. If only HTML is
+    available, strip tags + decode entities so it's readable."""
     if msg.is_multipart():
         for part in msg.walk():
-            if part.get_content_type() == "text/plain" and "attachment" not in str(part.get("Content-Disposition", "")):
+            ct = part.get_content_type()
+            disp = str(part.get("Content-Disposition", ""))
+            if ct == "text/plain" and "attachment" not in disp:
                 return _decode_payload(part)
         for part in msg.walk():
             if part.get_content_type() == "text/html":
-                return _decode_payload(part)
+                return html_to_text(_decode_payload(part))
         return ""
-    return _decode_payload(msg)
+    ct = msg.get_content_type()
+    raw = _decode_payload(msg)
+    if ct == "text/html":
+        return html_to_text(raw)
+    return raw
 
 
 def fetch_pending():
-    """Return all UNSEEN messages in INBOX as dicts."""
+    """Return all messages in INBOX as dicts (pending = anything not yet moved to Replied)."""
     out = []
     M = imap_connect()
     try:
         M.select("INBOX")
-        typ, data = M.search(None, "UNSEEN")
-        if typ != "OK":
+        typ, data = M.uid("SEARCH", None, "ALL")
+        if typ != "OK" or not data or not data[0]:
             return out
-        ids = data[0].split()
-        for i in ids:
-            typ, msg_data = M.fetch(i, "(BODY.PEEK[] UID)")
+        uids = data[0].split()
+        for uid in uids:
+            typ, msg_data = M.uid("FETCH", uid, "(BODY.PEEK[])")
             if typ != "OK" or not msg_data or not isinstance(msg_data[0], tuple):
-                continue
-            # Parse UID out of the response info; format like b'1 (UID 42 BODY[] {nnn}'
-            info = msg_data[0][0].decode(errors="replace")
-            uid_match = re.search(r"UID (\d+)", info)
-            uid = uid_match.group(1) if uid_match else None
-            if not uid:
                 continue
             raw = msg_data[0][1]
             msg = email.message_from_bytes(raw)
             out.append({
-                "uid": uid,
+                "uid": uid.decode(),
                 "from_addr": parseaddr(msg.get("From", ""))[1],
                 "from_name": parseaddr(msg.get("From", ""))[0],
                 "to_addr": parseaddr(msg.get("To", ""))[1],
@@ -191,20 +244,23 @@ def fetch_one(uid):
         M.logout()
 
 
-def mark_handled(uid):
-    """Mark UID Seen, move to Replied folder, expunge."""
+def move_to_folder(uid, folder):
+    """Move UID from INBOX to <folder>, creating the folder if needed. Marks Seen along the way."""
     M = imap_connect()
     try:
         M.select("INBOX")
-        # Create destination folder if it doesn't exist (silently ignored if it does).
-        M.create("Replied")
+        M.create(folder)  # silently no-op if it already exists
         M.uid("STORE", uid, "+FLAGS", "(\\Seen)")
-        copy_typ, _ = M.uid("COPY", uid, "Replied")
+        copy_typ, _ = M.uid("COPY", uid, folder)
         if copy_typ == "OK":
             M.uid("STORE", uid, "+FLAGS", "(\\Deleted)")
             M.expunge()
     finally:
         M.logout()
+
+
+def mark_handled(uid):
+    move_to_folder(uid, "Replied")
 
 
 # ----------------------------------------------------------------------------
@@ -286,15 +342,14 @@ def compose_view(uid):
         flash(f"Code generation failed: {e}")
         return redirect(url_for("inbox_view"))
 
-    subject_template, body_template = read_reply_template()
+    _subject, body_template = read_reply_template()
     body = body_template.replace("[CODE]", code)
 
-    # Reply-subject: prefix with Re: unless already there.
-    inbound_subject = msg["subject"].strip() or "Your Mosaic upload link"
-    if not re.match(r"(?i)^re:\s", inbound_subject):
-        reply_subject = f"Re: {inbound_subject}"
-    else:
+    inbound_subject = (msg["subject"] or "Your Mosaic upload link").strip()
+    if re.match(r"(?i)^re:\s", inbound_subject):
         reply_subject = inbound_subject
+    else:
+        reply_subject = f"Re: {inbound_subject}"
 
     return render_template(
         "compose.html",
@@ -325,6 +380,16 @@ def send_view(uid):
         flash(f"Sent, but mark-as-handled failed: {e}")
 
     flash(f"Reply sent to {to_addr}.")
+    return redirect(url_for("inbox_view"))
+
+
+@app.route("/ignore/<uid>", methods=["POST"])
+def ignore_view(uid):
+    try:
+        move_to_folder(uid, "Ignored")
+        flash("Message moved to Ignored.")
+    except Exception as e:
+        flash(f"Ignore failed: {e}")
     return redirect(url_for("inbox_view"))
 
 

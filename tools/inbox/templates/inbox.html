@@ -26,7 +26,12 @@
           <div class="small-mono">to: {{ m.to_addr }} &middot; {{ m.date }}</div>
           <div class="mt-1"><span class="text-secondary">subject:</span> {{ m.subject }}</div>
         </div>
-        <a href="{{ url_for('compose_view', uid=m.uid) }}" class="btn btn-cyan">Reply with link &rarr;</a>
+        <div class="d-flex gap-2">
+          <a href="{{ url_for('compose_view', uid=m.uid) }}" class="btn btn-cyan">Reply with link &rarr;</a>
+          <form method="POST" action="{{ url_for('ignore_view', uid=m.uid) }}" class="d-inline">
+            <button type="submit" class="btn btn-outline-secondary" title="Move to the Ignored folder">Ignore</button>
+          </form>
+        </div>
       </div>
       {% if m.body %}
         <hr class="my-2">

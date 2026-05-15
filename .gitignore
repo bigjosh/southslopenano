@@ -6,8 +6,9 @@ desktop.ini
 *.swp
 node_modules/
 
-# Inbox tool — local config holds creds
+# Inbox tool — local config holds creds + runtime logs
 tools/inbox/config.json
+tools/inbox/cf.log
 
 # Python
 __pycache__/

@@ -26,7 +26,7 @@ Sent to users who emailed one of the variant addresses (`request@`, `signup@`, e
 > - We review every upload before fabrication. If anything needs adjustment we'll send it back with a note.
 > - The disk locks for fabrication on May 24, 2026.
 > - The public viewer at https://mosaic.southslopenano.com is permanent — your image lives there regardless of whether you buy a disk.
-> - The physical disk is $150 if you want one, but the upload doesn't require buying. The buy button is on the claim page after you upload.
+> - The physical disk is $150 if you want one, but your uploaded image will be included on the disk either way. The buy button is on the claim page after you upload.
 >
 > If anything breaks or the link doesn't work, just reply.
 >
