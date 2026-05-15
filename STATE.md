@@ -107,6 +107,10 @@ See `DECISIONS_QUEUE.md` for the full list. Top items:
 
 ## Decision log (append-only, newest on top)
 
+**2026-05-14** — Real disk photo received from Josh and swapped in as the hero across all 7 landing pages and the `claim.html` success page. Replaces the previous `disk.png` render. Photo is gold-on-sapphire microetch held in a gloved hand, much better visual signal for both ad creative and the page. og:image updated to the same. DECISIONS_QUEUE #1 (disk photography) resolved.
+
+**2026-05-14** — Mosaic inbox tool: stable working set after several iterations — UID-based IMAP search/fetch, ALL not UNSEEN, HTML-body stripper, Ignore button (moves to new `Ignored` IMAP folder), template-parser fix so canned body actually populates the reply form, HTML alternative part on outbound replies so the upload link is clickable. End-to-end tested by Josh today (request → reply → upload → image on disk).
+
 **2026-05-13** — Variant attribution finalized: six thin landing pages (`/tile.html`, `/pixel.html`, `/sapphire.html`, `/lockin.html`, `/foundry.html`, `/etch.html`), each a copy of `/mosaic.html` with a different mailto recipient. Each Reddit variant points at its own slug; the To: header of inbound mail attributes it. Picked over UTM codes (words read better) and a single-page-with-JS approach (multiple pages are subtler — URLs look like normal site sections, not tracking links). Trade-off: copy changes need to propagate to 6 files; manual sync is acceptable for a 1-week campaign.
 
 **2026-05-13** — Mosaic landing moved to `/mosaic.html`; apex `/` is now a generic South Slope Nano Devices home page. Reason: campaign-specific copy was sitting on the front door; the apex is reusable for future projects once Mosaic concludes. Ad creatives' destination URL updated to `https://southslopenano.com/mosaic.html`.
