@@ -38,6 +38,7 @@ Reads:
 import json
 import os
 import sys
+from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 
@@ -85,8 +86,8 @@ def cmd_read(p, args):
     if mode == "text":
         return {"url": page.url, "text": page.inner_text("body")[:50000]}
     interactive_only = mode == "interactive"
-    js = """(() => {
-      const sel = arguments[0]
+    js = """(interactiveOnly) => {
+      const sel = interactiveOnly
         ? 'a, button, input, select, textarea, [role=button], [role=link], [contenteditable=true]'
         : 'h1,h2,h3,h4,h5,h6,a,button,input,select,textarea,label,p,li,[role=button],[role=link],[role=heading]';
       const els = [...document.querySelectorAll(sel)];
@@ -105,7 +106,7 @@ def cmd_read(p, args):
           disabled: el.hasAttribute('disabled')
         };
       });
-    })()"""
+    }"""
     page = _get_active_page(p)
     result = page.evaluate(js, interactive_only)
     return {"url": page.url, "title": page.title(), "elements": result}
@@ -136,6 +137,81 @@ def cmd_eval(p, args):
     return {"result": page.evaluate(js)}
 
 
+def cmd_type(p, args):
+    """type <selector> <text> — focuses the selector, then simulates real
+    keystrokes (vs fill() which just sets value). Required for react-select
+    and other components that watch for input events to show autocomplete."""
+    if len(args) < 2:
+        raise SystemExit("type requires a selector and a value")
+    page = _get_active_page(p)
+    sel, val = args[0], args[1]
+    page.locator(sel).first.click(timeout=10000)
+    page.keyboard.type(val, delay=20)
+    return {"typed": sel, "value": val}
+
+
+def cmd_press(p, args):
+    """press <key> — send a single key like Enter, Escape, Tab, ArrowDown.
+    Optional second arg is a selector to focus first."""
+    if not args:
+        raise SystemExit("press requires a key")
+    page = _get_active_page(p)
+    if len(args) >= 2:
+        page.locator(args[1]).first.focus(timeout=10000)
+    page.keyboard.press(args[0])
+    return {"pressed": args[0]}
+
+
+def cmd_screenshot(p, args):
+    """screenshot [path] — save a PNG of the active page. Defaults to
+    tools/reddit-driver/.screenshots/latest.png so Claude can Read it."""
+    page = _get_active_page(p)
+    here = Path(__file__).resolve().parent
+    out_dir = here / ".screenshots"
+    out_dir.mkdir(exist_ok=True)
+    path = Path(args[0]) if args else out_dir / "latest.png"
+    if not path.is_absolute():
+        path = (Path.cwd() / path).resolve()
+    page.screenshot(path=str(path), full_page=False)
+    return {"saved": str(path), "viewport": page.viewport_size or "(unknown)"}
+
+
+def cmd_click_at(p, args):
+    """click_at <x> <y> — real-mouse click at viewport coordinates.
+    Triggers proper native events; works with react-select etc. that
+    ignore synthetic events."""
+    if len(args) < 2:
+        raise SystemExit("click_at requires x and y")
+    x = float(args[0])
+    y = float(args[1])
+    page = _get_active_page(p)
+    page.mouse.click(x, y)
+    return {"clicked_at": [x, y]}
+
+
+def cmd_move_to(p, args):
+    """move_to <x> <y> — move mouse without clicking (hover)."""
+    if len(args) < 2:
+        raise SystemExit("move_to requires x and y")
+    x = float(args[0])
+    y = float(args[1])
+    page = _get_active_page(p)
+    page.mouse.move(x, y)
+    return {"moved_to": [x, y]}
+
+
+def cmd_upload(p, args):
+    """upload <selector> <path> — set a file on a (possibly hidden)
+    <input type=file>. Selector can be the input itself or use the nth
+    pattern e.g. 'input[type=file] >> nth=0'."""
+    if len(args) < 2:
+        raise SystemExit("upload requires a selector and a file path")
+    sel, path = args[0], args[1]
+    page = _get_active_page(p)
+    page.locator(sel).first.set_input_files(path)
+    return {"uploaded": path, "to": sel}
+
+
 COMMANDS = {
     "tabs": cmd_tabs,
     "goto": cmd_goto,
@@ -143,6 +219,12 @@ COMMANDS = {
     "click": cmd_click,
     "fill": cmd_fill,
     "eval": cmd_eval,
+    "type": cmd_type,
+    "press": cmd_press,
+    "screenshot": cmd_screenshot,
+    "click_at": cmd_click_at,
+    "move_to": cmd_move_to,
+    "upload": cmd_upload,
 }
 
 

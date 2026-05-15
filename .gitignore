@@ -10,6 +10,9 @@ node_modules/
 tools/inbox/config.json
 tools/inbox/cf.log
 
+# reddit-driver runtime screenshots
+tools/reddit-driver/.screenshots/
+
 # Python
 __pycache__/
 *.pyc
