@@ -41,22 +41,33 @@ import sys
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
+# Force UTF-8 stdout so JS payloads with non-ASCII (em-dashes, zero-width
+# space, etc.) don't crash the JSON dump on Windows code-page consoles.
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
+
 
 CDP_URL = os.environ.get("CDP_URL", "http://localhost:9222")
 
 
 def _get_active_page(browser):
-    """Pick the most-recently-focused page in the connected browser."""
+    """Pick the page to drive. If env var FOCUS_URL is set, prefer pages
+    whose URL contains that substring. Otherwise fall back to the last
+    page in the page list (most recently opened)."""
     pages = []
     for ctx in browser.contexts:
         pages.extend(ctx.pages)
     if not pages:
         raise RuntimeError("No pages found in connected Chrome.")
-    # Prefer a page on ads.reddit.com or reddit.com if one exists, else the first.
-    for p in pages:
-        if "reddit.com" in p.url:
-            return p
-    return pages[0]
+    hint = os.environ.get("FOCUS_URL")
+    if hint:
+        for p in pages:
+            if hint in p.url:
+                return p
+    return pages[-1]
 
 
 def _print(obj):
@@ -212,6 +223,34 @@ def cmd_upload(p, args):
     return {"uploaded": path, "to": sel}
 
 
+def cmd_upload_via_chooser(p, args):
+    """upload_via_chooser <click_selector> <path> — clicks a button that
+    triggers a native file chooser, intercepts the chooser, and sets the
+    file. For buttons that don't expose a hidden <input type=file>."""
+    if len(args) < 2:
+        raise SystemExit("upload_via_chooser requires a click selector and a file path")
+    sel, path = args[0], args[1]
+    page = _get_active_page(p)
+    with page.expect_file_chooser(timeout=15000) as fc_info:
+        page.locator(sel).first.click(timeout=10000)
+    fc_info.value.set_files(path)
+    return {"uploaded": path, "trigger": sel}
+
+
+def cmd_upload_via_click_xy(p, args):
+    """upload_via_click_xy <x> <y> <path> — click at coords to trigger a
+    file chooser, then intercept and set the file. For when the trigger
+    is hard to select but easy to point at."""
+    if len(args) < 3:
+        raise SystemExit("upload_via_click_xy requires x, y, and a file path")
+    x = float(args[0]); y = float(args[1]); path = args[2]
+    page = _get_active_page(p)
+    with page.expect_file_chooser(timeout=15000) as fc_info:
+        page.mouse.click(x, y)
+    fc_info.value.set_files(path)
+    return {"uploaded": path, "trigger": [x, y]}
+
+
 COMMANDS = {
     "tabs": cmd_tabs,
     "goto": cmd_goto,
@@ -225,6 +264,8 @@ COMMANDS = {
     "click_at": cmd_click_at,
     "move_to": cmd_move_to,
     "upload": cmd_upload,
+    "upload_via_chooser": cmd_upload_via_chooser,
+    "upload_via_click_xy": cmd_upload_via_click_xy,
 }
 
 
