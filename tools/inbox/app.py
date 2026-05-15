@@ -18,6 +18,7 @@ so edits to the template propagate without restarting the server.
 """
 
 import email
+import html as html_mod
 import imaplib
 import json
 import re
@@ -76,6 +77,30 @@ def html_to_text(s):
     p.feed(s)
     p.close()
     return p.get_text()
+
+
+# Linkify URLs in plain text. Trailing punctuation is excluded so a URL
+# at the end of a sentence doesn't capture the closing period.
+_URL_RE = re.compile(r'(https?://[^\s<>"\']+?)(?P<trail>[.,;:!?)]*)(?=\s|$)', re.MULTILINE)
+
+
+def text_to_html(text):
+    """Convert plain text email body to an HTML alternative — preserves
+    line breaks and turns URLs into clickable <a> tags."""
+    escaped = html_mod.escape(text)
+    escaped = _URL_RE.sub(
+        lambda m: f'<a href="{m.group(1)}">{m.group(1)}</a>{m.group("trail")}',
+        escaped,
+    )
+    return (
+        '<html><body>'
+        '<div style="white-space: pre-wrap; '
+        'font-family: -apple-system, system-ui, sans-serif; '
+        'font-size: 14px; line-height: 1.5; color: #222; max-width: 600px;">'
+        + escaped +
+        '</div>'
+        '</body></html>'
+    )
 
 
 HERE = Path(__file__).resolve().parent
@@ -267,14 +292,14 @@ def mark_handled(uid):
 # Upload-server API
 # ----------------------------------------------------------------------------
 
-def generate_upload_code(backer_email):
+def generate_upload_code(backer_email, notes="Mosaic"):
     r = requests.post(
         CONFIG["generate_code_url"],
         data={
             "command": "generate-code",
             "admin-id": CONFIG["admin_id"],
             "backer-id": backer_email,
-            "notes": "Mosaic",
+            "notes": notes,
         },
         timeout=20,
     )
@@ -303,6 +328,7 @@ def send_reply(to_addr, subject, body, in_reply_to=None, references=None):
     elif in_reply_to:
         msg["References"] = in_reply_to
     msg.set_content(body)
+    msg.add_alternative(text_to_html(body), subtype="html")
 
     port = CONFIG.get("smtp_port", 465)
     if port == 465:
@@ -336,8 +362,12 @@ def compose_view(uid):
         flash(f"Could not load UID {uid}")
         return redirect(url_for("inbox_view"))
 
+    # Tag the upload code with the funnel address (e.g. tile@, sapphire@) so the
+    # eventual upload can be attributed back to the ad variant the request came
+    # through. Falls back to "Mosaic" when the To: header is missing.
+    funnel_addr = (msg.get("to_addr") or "").strip() or "Mosaic"
     try:
-        code = generate_upload_code(msg["from_addr"])
+        code = generate_upload_code(msg["from_addr"], notes=funnel_addr)
     except Exception as e:
         flash(f"Code generation failed: {e}")
         return redirect(url_for("inbox_view"))
