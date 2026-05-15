@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,84 +15,169 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
     :root {
+      --bg: #0a0a0a;
+      --fg: #f1f1f1;
+      --muted: #a8a8a8;
+      --soft: #e6e6e6;
       --accent: #00ffff;
+      --border: #333;
     }
-    html { font-size: 18px; }
-    body { background-color: #0a0a0a; }
-    .text-accent { color: var(--accent); }
-    .btn-cyan {
-      background-color: var(--accent);
-      color: #000;
-      border: none;
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      font-size: 18px;
     }
-    .btn-cyan:hover, .btn-cyan:focus {
-      background-color: var(--accent);
-      color: #000;
-      opacity: 0.9;
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      line-height: 1.6;
+      font-size: 1.25rem;
     }
-    hr.hr-cyan {
-      border-top: 1px solid var(--accent);
-      opacity: 1;
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
     }
+    h1 {
+      font-size: clamp(3rem, 11vw, 4.5rem);
+      letter-spacing: -0.03em;
+      margin: 0 0 12px;
+      font-weight: 700;
+      line-height: 1.05;
+    }
+    h2 {
+      font-size: 1.75rem;
+      letter-spacing: -0.01em;
+      margin: 32px 0 12px;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+    p { margin: 0 0 18px; }
+    a { color: var(--accent); }
+    a:hover { opacity: 0.85; }
+    ul { padding-left: 24px; margin: 0 0 20px; }
+    ul li { margin-bottom: 14px; color: var(--soft); line-height: 1.6; }
+    .accent { color: var(--accent); font-weight: 600; }
+    .center { text-align: center; }
+    .tagline {
+      font-size: 1.3125rem;
+      color: var(--muted);
+      margin: 0 0 28px;
+      line-height: 1.45;
+    }
+    .hero-img {
+      display: block;
+      width: 320px;
+      max-width: 100%;
+      margin: 20px auto 28px;
+      border-radius: 4px;
+    }
+    .counter {
+      text-align: center;
+      font-size: 1.125rem;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+    .counter .filled { color: var(--accent); font-weight: 600; }
+    .deadline-line { text-align: center; margin: 0 0 28px; }
     .deadline {
       display: inline-block;
       padding: 4px 12px;
-      background-color: rgba(0, 255, 255, 0.1);
+      background: rgba(0, 255, 255, 0.1);
       color: var(--accent);
       font-weight: 600;
       border-radius: 3px;
+      font-size: 1.0625rem;
     }
-    a { color: var(--accent); }
-    a:hover { color: var(--accent); opacity: 0.85; }
+    .cta-wrap { text-align: center; margin: 20px 0; }
+    .cta-button {
+      display: inline-block;
+      padding: 18px 36px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      font-size: 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 4px;
+      font-family: inherit;
+      text-decoration: none;
+    }
+    .cta-button:hover { opacity: 0.9; }
+    .fine {
+      font-size: 1.0625rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--accent);
+      margin: 36px 0;
+    }
+    footer {
+      margin-top: 56px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 1rem;
+      text-align: center;
+    }
+    @media (max-width: 520px) {
+      main { padding: 24px 14px 40px; }
+      h2 { margin: 28px 0 10px; }
+      hr.divider { margin: 28px 0; }
+    }
   </style>
 </head>
 <body>
-  <main class="container py-4 py-md-5" style="max-width: 720px;">
-    <h1 class="display-3 fw-bold mb-2">Mosaic</h1>
-    <p class="lead text-secondary mb-4">A 29mm sapphire disk, etched in gold by semiconductor lithography. 1,124 tiles. One physical run.</p>
+  <main>
+    <h1>Mosaic</h1>
+    <p class="tagline">A 29mm sapphire disk, etched in gold by semiconductor lithography. 1,124 tiles. One physical run.</p>
 
-    <img src="/disk-photo.jpg" alt="The Mosaic disk — a 29mm sapphire wafer with gold-etched contents, held in a gloved hand" class="d-block mx-auto my-4" style="width: 320px; max-width: 100%; border-radius: 4px;">
+    <img src="/disk-photo.jpg" alt="The Mosaic disk — a 29mm sapphire wafer with gold-etched contents, held in a gloved hand" class="hero-img">
 
-    <p class="text-center text-secondary mb-2">
-      <span class="text-accent fw-semibold" id="filled-count">…</span> of 1,124 tiles filled.
+    <p class="counter">
+      <span class="filled" id="filled-count">…</span> of 1,124 tiles filled.
       <span id="remaining-count">…</span> remain.
     </p>
 
-    <p class="text-center mb-5">
+    <p class="deadline-line">
       File locks on <span class="deadline">May 24, 2026</span>. After that the disk goes to fabrication and the contents are permanent.
     </p>
 
-    <h2 class="h3 fw-semibold mt-5 mb-3">Claim a tile.</h2>
+    <h2>Claim a tile.</h2>
     <p>Upload is free. You send a 500×500 monochrome image — anything you can express in pixels. Your image joins the collective disk; every contributor's image appears on every disk.</p>
 
     <p>To request an upload link, send us an email. In the body, briefly mention what you plan to upload. This is mostly for spam control, but we're also excited to hear your ideas.</p>
 
-    <div class="text-center my-4">
-      <a class="btn btn-cyan btn-lg fw-semibold px-4 py-3" href="mailto:mosaic@southslopenano.com?subject=Mosaic%20upload%20link%20request&body=I%20plan%20to%20upload%3A%20">Send your email request</a>
-    </div>
+    <p class="cta-wrap">
+      <a class="cta-button" href="mailto:mosaic@southslopenano.com?subject=Mosaic%20upload%20link%20request&body=I%20plan%20to%20upload%3A%20">Send your email request</a>
+    </p>
 
-    <p class="text-secondary">If you want the physical object afterwards, it's $150 — but your uploaded image will be included on the disk either way. Everyone who buys gets the same finished object with their own image and everyone else's images on it.</p>
+    <p class="fine">If you want the physical object afterwards, it's $150 — but your uploaded image will be included on the disk either way. Everyone who buys gets the same finished object with their own image and everyone else's images on it.</p>
 
-    <hr class="hr-cyan my-5">
+    <hr class="divider">
 
-    <h2 class="h3 fw-semibold mb-3">What's actually happening</h2>
+    <h2>What's actually happening</h2>
     <p>South Slope Nano Devices is fabricating one run of a 29mm sapphire disk. Each tile is a 500×500 monochrome bitmap. The bitmaps are etched in gold using the same semiconductor lithography used to make microchips. The result is too small to read with the naked eye — you can see something is etched on the disk, but the individual tiles need a microscope.</p>
 
     <p>The full-resolution contents always live publicly at <a href="https://mosaic.southslopenano.com" target="_blank" rel="noopener">mosaic.southslopenano.com</a>. That's the canonical way to read what's on the disk. The physical object is the souvenir.</p>
 
-    <h2 class="h3 fw-semibold mt-5 mb-3">Honest notes</h2>
-    <ul class="ps-4">
-      <li class="mb-2">The disk is too small to read with the naked eye. Get a microscope, or use the public viewer.</li>
-      <li class="mb-2">The public viewer at <a href="https://mosaic.southslopenano.com" target="_blank" rel="noopener">mosaic.southslopenano.com</a> is permanent — your image lives there regardless of whether you buy a disk. Don't upload anything you wouldn't be comfortable being seen forever. We also expect the physical disks to be around for the next 10,000 years.</li>
-      <li class="mb-2">Be cool and creative. We review every upload before fabrication. Anything we wouldn't want next to our own image gets bounced.</li>
-      <li class="mb-2">Hard cap of 1,124 tiles. When May 24 hits, the file locks. Then never again from this team.</li>
+    <h2>Honest notes</h2>
+    <ul>
+      <li>The disk is too small to read with the naked eye. Get a microscope, or use the public viewer.</li>
+      <li>The public viewer at <a href="https://mosaic.southslopenano.com" target="_blank" rel="noopener">mosaic.southslopenano.com</a> is permanent — your image lives there regardless of whether you buy a disk. Don't upload anything you wouldn't be comfortable being seen forever. We also expect the physical disks to be around for the next 10,000 years.</li>
+      <li>Be cool and creative. We review every upload before fabrication. Anything we wouldn't want next to our own image gets bounced.</li>
+      <li>Hard cap of 1,124 tiles. When May 24 hits, the file locks. Then never again from this team.</li>
     </ul>
 
-    <footer class="mt-5 pt-3 border-top text-center text-secondary small">
+    <footer>
       South Slope Nano Devices, LLC
     </footer>
   </main>
