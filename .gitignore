@@ -14,6 +14,9 @@ tools/inbox/cf.log
 claude/
 .claude/
 
+# Monitor-tick log (local-only timeseries)
+tools/.monitor-ticks.jsonl
+
 # reddit-driver runtime screenshots and one-shot JS helpers
 tools/reddit-driver/.screenshots/
 tools/reddit-driver/.*.js
