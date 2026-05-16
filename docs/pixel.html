@@ -220,30 +220,18 @@ alt="Web Analytics"
 referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 <!-- End of Statcounter Code -->
 <script>
-// cta-click tracker v2 — replaceState + unsafe-url Referer override
-// so StatCounter logs each click as /<page>?event=<name>.
+// cta-click tracker v3 — uses StatCounter's native record_click API
+// so the click logs to Exit Links naturally (no Referer hacks).
 (function() {
-  var variant = (location.pathname.split('/').pop() || 'home').replace(/\.html$/, '') || 'home';
-  function trackEvent(name) {
-    if (!window.history || !history.replaceState) return;
-    var orig = location.pathname + location.search + location.hash;
-    var fake = location.pathname + '?event=' + encodeURIComponent(name);
-    try { history.replaceState(null, '', fake); } catch (e) { return; }
-    var img = new Image();
-    img.referrerPolicy = 'unsafe-url';
-    var restore = function() {
-      try { history.replaceState(null, '', orig); } catch (e) {}
-    };
-    img.onload = restore;
-    img.onerror = restore;
-    img.src = 'https://c.statcounter.com/13233744/0/be0b9727/1/?_=' + Date.now();
+  function fire(url) {
+    if (window._statcounter && _statcounter.record_click) {
+      try { _statcounter.record_click(13233744, url); } catch (e) {}
+    }
   }
-  window.trackEvent = trackEvent;
+  window.trackEvent = function(name) { fire('event:' + name); };
   document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a.cta-button[href^="mailto:"], a.fine[href^="mailto:"]').forEach(function(a) {
-      a.addEventListener('click', function() {
-        trackEvent('mailto-click-' + variant);
-      });
+      a.addEventListener('click', function() { fire(a.href); });
     });
   });
 })();

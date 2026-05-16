@@ -1,62 +1,45 @@
-"""Wire a StatCounter click-event tracker into the 8 variant pages.
+"""Wire StatCounter's native record_click() into the 8 variant pages.
 
-The trick: our landing pages set referrerpolicy=no-referrer at the
-meta level, which strips Referer from any tracking image. StatCounter
-then can't tell which page fired the pixel and shows "unknown".
-We work around it by:
+counter.js exposes `_statcounter.record_click(projectId, url)` —
+logs to their Exit Links / outbound-click report. Cleaner than
+firing a raw pixel: they handle session, security, deduplication.
 
-  1. Setting referrerPolicy=unsafe-url on the dynamic <img> so it
-     sends Referer despite the page-level meta.
-  2. history.replaceState() to a URL with ?event=<name> just before
-     firing the pixel, then restoring the URL on image load/error.
-     This makes the Referer that StatCounter sees include the event
-     tag, so the click logs as a distinct page in the Activity feed.
+For future button types, expose window.trackEvent(name) which calls
+record_click with a `event:name` identifier. Per-variant attribution
+falls out because each page passes its own mailto URL (sapphire@,
+pixel@, tile@, etc.) — Exit Links groups by destination URL.
 
-The exposed window.trackEvent(name) function lets us tag any future
-button presses by calling trackEvent('whatever') from another handler.
-
-Idempotent — re-running replaces any previous tracker block.
+Idempotent — replaces any prior tracker block.
 """
 
 import re
 from pathlib import Path
 
 DOCS = Path(__file__).resolve().parents[1] / 'docs'
+PROJECT_ID = 13233744
 
 OLD_BLOCK_RE = re.compile(
     r'\n*<script>\s*\n//\s*cta-click tracker[\s\S]*?</script>\n*',
     re.MULTILINE,
 )
 
-SCRIPT = """
+SCRIPT = f"""
 <script>
-// cta-click tracker v2 — replaceState + unsafe-url Referer override
-// so StatCounter logs each click as /<page>?event=<name>.
-(function() {
-  var variant = (location.pathname.split('/').pop() || 'home').replace(/\\.html$/, '') || 'home';
-  function trackEvent(name) {
-    if (!window.history || !history.replaceState) return;
-    var orig = location.pathname + location.search + location.hash;
-    var fake = location.pathname + '?event=' + encodeURIComponent(name);
-    try { history.replaceState(null, '', fake); } catch (e) { return; }
-    var img = new Image();
-    img.referrerPolicy = 'unsafe-url';
-    var restore = function() {
-      try { history.replaceState(null, '', orig); } catch (e) {}
-    };
-    img.onload = restore;
-    img.onerror = restore;
-    img.src = 'https://c.statcounter.com/13233744/0/be0b9727/1/?_=' + Date.now();
-  }
-  window.trackEvent = trackEvent;
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('a.cta-button[href^="mailto:"], a.fine[href^="mailto:"]').forEach(function(a) {
-      a.addEventListener('click', function() {
-        trackEvent('mailto-click-' + variant);
-      });
-    });
-  });
-})();
+// cta-click tracker v3 — uses StatCounter's native record_click API
+// so the click logs to Exit Links naturally (no Referer hacks).
+(function() {{
+  function fire(url) {{
+    if (window._statcounter && _statcounter.record_click) {{
+      try {{ _statcounter.record_click({PROJECT_ID}, url); }} catch (e) {{}}
+    }}
+  }}
+  window.trackEvent = function(name) {{ fire('event:' + name); }};
+  document.addEventListener('DOMContentLoaded', function() {{
+    document.querySelectorAll('a.cta-button[href^="mailto:"], a.fine[href^="mailto:"]').forEach(function(a) {{
+      a.addEventListener('click', function() {{ fire(a.href); }});
+    }});
+  }});
+}})();
 </script>
 """
 
