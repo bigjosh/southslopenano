@@ -219,20 +219,30 @@ src="https://c.statcounter.com/13233744/0/be0b9727/1/"
 alt="Web Analytics"
 referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 <!-- End of Statcounter Code -->
-
 <script>
-// cta-click tracker — fires a StatCounter pixel when the mailto
-// CTA is clicked. Logs as a distinct pageview path per variant.
+// cta-click tracker v2 — replaceState + unsafe-url Referer override
+// so StatCounter logs each click as /<page>?event=<name>.
 (function() {
   var variant = (location.pathname.split('/').pop() || 'home').replace(/\.html$/, '') || 'home';
+  function trackEvent(name) {
+    if (!window.history || !history.replaceState) return;
+    var orig = location.pathname + location.search + location.hash;
+    var fake = location.pathname + '?event=' + encodeURIComponent(name);
+    try { history.replaceState(null, '', fake); } catch (e) { return; }
+    var img = new Image();
+    img.referrerPolicy = 'unsafe-url';
+    var restore = function() {
+      try { history.replaceState(null, '', orig); } catch (e) {}
+    };
+    img.onload = restore;
+    img.onerror = restore;
+    img.src = 'https://c.statcounter.com/13233744/0/be0b9727/1/?_=' + Date.now();
+  }
+  window.trackEvent = trackEvent;
   document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a.cta-button[href^="mailto:"], a.fine[href^="mailto:"]').forEach(function(a) {
       a.addEventListener('click', function() {
-        new Image().src = 'https://c.statcounter.com/13233744/0/be0b9727/1/'
-          + '?u=' + encodeURIComponent('/cta-click/' + variant)
-          + '&t=' + encodeURIComponent('cta-click-' + variant)
-          + '&r=' + encodeURIComponent(location.href)
-          + '&_=' + Date.now();
+        trackEvent('mailto-click-' + variant);
       });
     });
   });
