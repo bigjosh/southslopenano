@@ -16,6 +16,11 @@ from pathlib import Path
 from urllib.request import Request, urlopen
 from urllib.error import URLError
 
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except Exception:
+    pass
+
 ROOT = Path(__file__).resolve().parents[1]
 LOG = ROOT / 'tools' / '.monitor-ticks.jsonl'
 
