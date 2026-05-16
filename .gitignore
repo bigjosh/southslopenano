@@ -10,6 +10,10 @@ node_modules/
 tools/inbox/config.json
 tools/inbox/cf.log
 
+# Local Claude Code session artifacts
+claude/
+.claude/
+
 # reddit-driver runtime screenshots and one-shot JS helpers
 tools/reddit-driver/.screenshots/
 tools/reddit-driver/.*.js
