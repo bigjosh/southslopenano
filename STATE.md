@@ -1,17 +1,29 @@
 # STATE.md — Live Campaign State
 
-**Last updated:** 2026-05-13 by Claude
+**Last updated:** 2026-05-15 by Claude (mid-phase-1 monitoring)
 
 ---
 
 ## Snapshot
 
-- **Sprint timeline:** 11 days to file-lock = 2026-05-24
-- **Ad budget:** $1,000 (untouched)
-- **Tiles filled:** ~218 of 1,124 at last check — re-verify with live count before any quote
-- **Tiles remaining:** ~906
-- **Paid orders since campaign start:** 0
-- **Free uploads since campaign start:** 0 (campaign hasn't started)
+- **Phase 1 window:** ends midnight 2026-05-17 (~36 hours left); Phase 1 budget = $500.
+- **File-lock:** 2026-05-24 (9 days out).
+- **Total ad-spend cap:** $1,000 cumulative.
+- **Tiles filled:** 243 of 1,124 (Δ +25 since campaign start — all from organic CW&T-side codes, NOT campaign-driven).
+- **Tiles remaining:** 881.
+- **Paid orders since campaign start:** 0.
+- **External email requests since campaign start:** 0 (zero mailto sends from real users hitting the landing pages).
+- **Mosaic-tagged codes generated:** 8 total — 7 are Josh's internal tests, 1 is Josh's own uploaded-from-jb-mosaic end-to-end check (status=uploaded). Zero ad-driven.
+
+## Live channel state (2026-05-15)
+
+- **Reddit Ads:** BLOCKED — both campaigns say "Not delivering / Campaign not funded." Spent $27 before halt. Billing page: Mastercard 8144 on file, $0 balance, Tax Information section empty (Tax ID + Business address both blank). Last transactions Nov 2025. Most-likely cause: tax-info gate, possibly compounded by card decline. **Owner: Josh.**
+- **Meta Ads:** delivering. Both Mosaic ad sets show green-dot Active. All-time data:
+  - r/place ad set: 17 Landing Page Views at $0.11/LPV.
+  - Scarcity ad set: 21 Landing Page Views at $0.11/LPV.
+  - **Combined: 38 LPV → 0 mailto requests = 0% conversion.**
+  - Total Meta spend so far: ~$4 (38 × $0.11).
+- **Conversion gap is the binding constraint, not ad spend.** Raising daily budgets without fixing the LPV→mailto rate pours money into a broken funnel.
 - **South Slope Nano Devices brand:** exists on Stripe; `southslopenano.com` registered by Josh; DNS pointing pending.
 - **Product name:** **Mosaic**. Hostname for the upload flow: `mosaic.southslopenano.com`.
 - **`claim.html`:** migrated into `docs/upload/claim.html` in this repo. All API calls now absolute to `https://mosaic.southslopenano.com/upload/cgi-bin/app.py`. File-lock date set to May 24, 2026. CW&T-domain leaks removed. Will be served from `https://southslopenano.com/upload/claim.html?code=...` once pushed.
@@ -106,6 +118,8 @@ See `DECISIONS_QUEUE.md` for the full list. Top items:
 ---
 
 ## Decision log (append-only, newest on top)
+
+**2026-05-15** — Phase 1 monitoring round. Meta dashboard finally rendered after "Loading your ad account." spinner cleared on clean `/` redirect (act= param + date=today combo seems to hang it; bare URL + Maximum date range worked). Confirmed both Meta Mosaic ad sets are Active and delivering, but at near-zero pace ($4 total spend across 3 days) and 0% LPV→mailto conversion. Reddit campaigns are paused by Reddit's billing system; needs Josh's tax-info entry. Logged the conversion gap to `DECISIONS_QUEUE.md` as #2.
 
 **2026-05-14** — Real disk photo received from Josh and swapped in as the hero across all 7 landing pages and the `claim.html` success page. Replaces the previous `disk.png` render. Photo is gold-on-sapphire microetch held in a gloved hand, much better visual signal for both ad creative and the page. og:image updated to the same. DECISIONS_QUEUE #1 (disk photography) resolved.
 
