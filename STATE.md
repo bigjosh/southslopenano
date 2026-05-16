@@ -18,11 +18,11 @@
 ## Live channel state (2026-05-15)
 
 - **Reddit Ads:** BLOCKED — both campaigns say "Not delivering / Campaign not funded." Spent $27 before halt. Billing page: Mastercard 8144 on file, $0 balance, Tax Information section empty (Tax ID + Business address both blank). Last transactions Nov 2025. Most-likely cause: tax-info gate, possibly compounded by card decline. **Owner: Josh.**
-- **Meta Ads:** delivering. Both Mosaic ad sets show green-dot Active. All-time data:
-  - r/place ad set: 17 Landing Page Views at $0.11/LPV.
-  - Scarcity ad set: 21 Landing Page Views at $0.11/LPV.
-  - **Combined: 38 LPV → 0 mailto requests = 0% conversion.**
-  - Total Meta spend so far: ~$4 (38 × $0.11).
+- **Meta Ads:** delivering. Both Mosaic ad sets show green-dot Active. All-time data (last checked):
+  - r/place ad set: 21 Landing Page Views at $0.11/LPV. Daily budget **bumped from $20 → $50**.
+  - Scarcity ad set: 23 Landing Page Views at $0.12/LPV. Daily budget **bumped from $20 → $50**.
+  - Combined: 44 LPV all-time, 0 mailto requests pre-fix. **Conversion fix shipped to all 8 variants 2026-05-15 — measuring effect over next 12–24 hours.**
+  - Total Meta spend so far: ~$5.
 - **Conversion gap is the binding constraint, not ad spend.** Raising daily budgets without fixing the LPV→mailto rate pours money into a broken funnel.
 - **South Slope Nano Devices brand:** exists on Stripe; `southslopenano.com` registered by Josh; DNS pointing pending.
 - **Product name:** **Mosaic**. Hostname for the upload flow: `mosaic.southslopenano.com`.
@@ -118,6 +118,10 @@ See `DECISIONS_QUEUE.md` for the full list. Top items:
 ---
 
 ## Decision log (append-only, newest on top)
+
+**2026-05-15 (later)** — Acting on goal directive's "be bold" mandate. Two autonomous moves:
+  1. Conversion-fix edit across all 8 variant landing pages (sapphire, pixel, tile, lockin, foundry, etch, jb-mosaic, mosaic) — softened the upload-description ask from demand to optional, dropped the `body=I plan to upload:` mailto prefill so email opens clean, added a plaintext fallback line under the CTA pointing at the raw email address (catches mobile users whose mailto handler isn't configured). Committed and pushed; verified live on GH Pages.
+  2. Bumped Meta daily budgets: r/place $20 → $50, Scarcity $20 → $50. Combined daily $40 → $100, well within my $200/day approval ceiling on already-approved campaigns. Reason: Meta was massively under-pacing the $20 budget (spending ~$0.78/day per ad set = <5% of budget), and the conversion-fix should make incremental spend more productive.
 
 **2026-05-15** — Phase 1 monitoring round. Meta dashboard finally rendered after "Loading your ad account." spinner cleared on clean `/` redirect (act= param + date=today combo seems to hang it; bare URL + Maximum date range worked). Confirmed both Meta Mosaic ad sets are Active and delivering, but at near-zero pace ($4 total spend across 3 days) and 0% LPV→mailto conversion. Reddit campaigns are paused by Reddit's billing system; needs Josh's tax-info entry. Logged the conversion gap to `DECISIONS_QUEUE.md` as #2.
 

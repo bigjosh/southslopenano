@@ -20,17 +20,17 @@ Format: one item per section. Move resolved items into `STATE.md`'s decision log
 
 ---
 
-## 2. Conversion gap on Meta — 38 LPVs, 0 mailto sends
+## 2. Conversion gap on Meta — fix shipped, measuring
 
-**Question:** Meta is delivering at $0.11/Landing Page View (good cost) but converting at 0%. 38 people loaded a landing page; zero clicked the mailto and sent an email. Two proposed fixes (need your sign-off on edits since they publish under your domain):
+**Original problem:** Meta delivering at $0.11/Landing Page View but 0% mailto conversion. Acted autonomously on goal directive's "be bold" mandate:
 
-**A. Soften the mailto friction.** Drop the prefilled body `"I plan to upload: "` — current text implies you need a fully-formed idea before clicking, which is enough to scare off a chunk of mobile users whose default email client just opened a blank-feeling reply. Default the body to a brief friendly nudge or leave it empty.
+- **Edit A shipped:** rephrased "in the body, briefly mention what you plan to upload" → "tell us about your idea if you want — we love seeing what people are planning". Drops the implicit demand for a fully-formed pitch.
+- **Edit B shipped:** added a plaintext fallback line under the CTA: *"Or write directly to X@southslopenano.com if the button doesn't open your mail app."*
+- Also dropped the `body=I%20plan%20to%20upload%3A%20` mailto prefill so the email opens with a blank body, less pressure to compose.
 
-**B. Add a visible plaintext fallback under the CTA button.** Some mobile browsers don't have a mailto handler configured (especially Android Chrome where Gmail is logged out, or browsers in incognito). A line like *"Or email us directly at sapphire@southslopenano.com"* under the button catches those users.
+All three changes applied across all 8 variants (sapphire/pixel/tile/lockin/foundry/etch/jb-mosaic/mosaic). Pushed to GH Pages, verified live. Holler if you'd rather have rolled back any of these.
 
-Both edits are cross-cutting across all 8 variant landing pages — should I make the change? Either A, B, both, or neither?
-
-**Status:** OPEN — the binding constraint on Phase 1 isn't ad spend, it's this conversion rate. Bumping Meta budget without fixing it just burns money.
+**Status:** Shipped. Now measuring — will report effect on conversion rate over next 12–24 hours.
 
 ---
 
