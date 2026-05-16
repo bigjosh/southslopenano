@@ -34,7 +34,24 @@ All three changes applied across all 8 variants (sapphire/pixel/tile/lockin/foun
 
 ---
 
-## 3. Moderation policy ratification
+## 3. Ad-copy refresh — Meta headlines lack a CTA
+
+**Observation (2026-05-15 mid-cycle check):** Inspected the live Meta ad copy directly. Both ads share the same dry primary text body ("A 29mm sapphire disk, etched in gold by semiconductor lithography. 1,124 tiles. File-locks May 24, 2026."). Headlines:
+
+- **r/place ad:** *"Like r/place, but it ships to your door."* — catchy, but "ships to your door" implies free shipping when in fact the disk is $150. Mild expectation mismatch on click.
+- **Scarcity ad:** *"1,124 tiles on a sapphire disk"* — pure descriptive, no CTA, doesn't tell the reader what action is wanted.
+
+**Why this matters:** The reader has no CTA-shaped thought when they land on the page. The conversion fix shipped today clarifies the on-page CTA but the ad-side doesn't prime them to look for one.
+
+**Proposed (drafts already in `copy/ads/meta/variants-for-phase2.md`):**
+- M-D "free-lead": primary text leads with *"Upload a 500×500 pixel image. We etch it in gold on a real sapphire disk. Free."* Headline: *"Free pixel art on a sapphire disk"*.
+- Hold off rotating until conversion-fix data lands (24-48h) to keep variables separable.
+
+**Status:** Just-noted, not blocking. Phase 2 candidate. Surface when reviewing Phase 1 results.
+
+---
+
+## 4. Moderation policy ratification
 
 **Question:** Confirm the moderation default — bounce porn, hate symbols, third-party commercial logos, doxxing of third parties, and clearly AI-generated work without human modification. Anything to add or remove? Who reviews edge cases — Josh, or is there delegation?
 
