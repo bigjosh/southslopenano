@@ -119,6 +119,8 @@ See `DECISIONS_QUEUE.md` for the full list. Top items:
 
 ## Decision log (append-only, newest on top)
 
+**2026-05-15 (~23:00, post-bump check)** — Budget bump is working on the delivery side. ~40 min after pushing daily budgets $20→$50, combined LPVs went 44 → 54 (+10 new). That's roughly double the pre-bump pace per hour. r/place cost-per-LPV climbed $0.11 → $0.17 (Meta bidding higher to fill the new budget); Scarcity stayed flat at $0.12. Conversion side still 0 — but those 10 new LPVs largely landed on the OLD landing-page copy because GH Pages deployed only ~50 min ago and the new LPVs trickle in over the ad-set's lifetime. Need at least another 2-3 hours of fresh post-fix LPVs to judge the conversion change.
+
 **2026-05-15 (later)** — Acting on goal directive's "be bold" mandate. Two autonomous moves:
   1. Conversion-fix edit across all 8 variant landing pages (sapphire, pixel, tile, lockin, foundry, etch, jb-mosaic, mosaic) — softened the upload-description ask from demand to optional, dropped the `body=I plan to upload:` mailto prefill so email opens clean, added a plaintext fallback line under the CTA pointing at the raw email address (catches mobile users whose mailto handler isn't configured). Committed and pushed; verified live on GH Pages.
   2. Bumped Meta daily budgets: r/place $20 → $50, Scarcity $20 → $50. Combined daily $40 → $100, well within my $200/day approval ceiling on already-approved campaigns. Reason: Meta was massively under-pacing the $20 budget (spending ~$0.78/day per ad set = <5% of budget), and the conversion-fix should make incremental spend more productive.
