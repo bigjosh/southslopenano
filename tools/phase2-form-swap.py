@@ -70,7 +70,7 @@ CSS_BLOCK = """
 .dropzone:has(canvas:not([hidden])) .dropzone-plus { display: none; }
 .dropzone:hover { border-color: var(--accent); }
 #dropzone-label { color: var(--muted); font-size: 1rem; }
-#preview-canvas {
+#preview-canvas:not([hidden]) {
   display: block;
   width: 100%;
   max-width: 300px;
