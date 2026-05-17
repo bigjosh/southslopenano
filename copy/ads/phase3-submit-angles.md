@@ -1,56 +1,53 @@
-# Phase 3 ad angles — "submit cool stuff" voice
+# Phase 3 ad angles — "tiny time capsule" voice
 
 Three angles, drafted for both Reddit and Meta. Voice rewrite of the
-old `copy/ads/reddit/angle-{1,2,3,4}-*.md` and
-`copy/ads/meta/variants-for-phase2.md` — those are now superseded.
+earlier "we're curating cool stuff" draft, refined around Josh's
+phrasing: *"we are soliciting image submissions for our tiny time
+capsule."*
 
-Tone direction (Josh, 2026-05-17):
-- We're curating cool stuff for a physical artifact.
-- Drop "free" verbiage entirely.
-- "Submit" not "upload" or "claim" — implies editorial selection.
-- The disk is a serious physical object that'll last 10,000 years, not
-  a freemium tile-claim.
-- The $150 ask is "want to own one of these objects?" not "buy a souvenir
-  of your tile."
+The framing layered onto the existing approach:
+- **"Tiny time capsule"** = the core hook. Concrete, physical,
+  future-oriented, already-familiar concept. Avoids tech-y and
+  NFT-adjacent connotations.
+- **"Sapphire and gold"** = the material credibility. Earns the
+  $150 ask without leading with it.
+- **"Submit"** = editorial/invitational, not transactional.
+- **No "free" anywhere.** Free wasn't motivating; the chance to be
+  *in* the artifact is the motivation.
 
-All three angles point at the variant landing pages; the
-`?source=` URL param overrides the per-page hidden field so Josh can
-tag specific ad URLs without making new pages.
+Destination URLs keep per-variant attribution. The `?source=` URL
+param overrides the per-page hidden field when needed.
 
-Destination URLs use existing variants for attribution: pixel-art →
-`/pixel.html`, scarcity/HN → `/sapphire.html`, general invitation →
-`/tile.html`. Per-platform attribution lands in StatCounter Exit Links
-plus the Worker's KV-stored `source` field.
+Old `copy/ads/reddit/angle-{1..4}-*.md` and
+`copy/ads/meta/variants-for-phase2.md` are superseded; this file is
+authoritative going forward.
 
 ---
 
-## Angle A — "Got something cool?" (general invitation)
+## Angle A — "tiny time capsule" (universal invitation)
 
-The most universal angle. Lead with the invitation; let the
-permanence/material details earn their place on the landing page.
+The broadest hook. Leads with the time-capsule metaphor; the disk
+material details are the proof.
 
 ### Reddit
 
-**Title:** We're etching 1,124 little pictures into gold on a sapphire disk this May. Got something cool to send in?
+**Title:** We're making a tiny time capsule etched in gold on a sapphire disk. Send us something cool to put on it.
 
 **Image:** Disk photo (`/disk-photo.jpg`).
 
-**Link card subtitle:** A real semiconductor-lithography artifact. Submissions close May 24. We review every one.
+**Link card subtitle:** 1,124 contributors. One disk. Submissions close May 24.
 
 **Destination URL:** `https://southslopenano.com/tile.html`
 
 **Target subs:** r/somethingimade, r/InternetIsBeautiful, r/Aesthetic, r/woahdude
 
-**Notes:** Plainspoken, no jargon. Curiosity hook. Works because most
-people skimming Reddit have *some* cool image in mind already.
-
 ### Meta
 
-**Primary text:** We're etching 1,124 little pictures into gold on a 29mm sapphire disk this May. Got something cool to send in? Submissions close May 24.
+**Primary text:** We're making a tiny time capsule — 1,124 little pictures etched in gold on a 29mm sapphire disk this May. Send us something cool to put on it. Submissions close May 24.
 
-**Headline:** Send us something for the disk
+**Headline:** A tiny gold-and-sapphire time capsule
 
-**Description:** 29mm sapphire, etched in gold
+**Description:** 1,124 contributors. Submit something cool.
 
 **CTA:** Sign up
 
@@ -58,34 +55,30 @@ people skimming Reddit have *some* cool image in mind already.
 
 ---
 
-## Angle B — "Your pixel art, in literal gold" (for pixel-art communities)
+## Angle B — "your pixel art, in literal gold" (pixel-art communities)
 
-Speak directly to communities that already think in 1-bit / small
-canvases / permanence.
+For audiences that already think in 1-bit and small canvases. The
+"literal gold" line is what should stick.
 
 ### Reddit
 
-**Title:** Send us your pixel art. We'll etch it in gold on a sapphire disk that'll outlast everyone reading this.
+**Title:** Send us your pixel art. We're making a tiny time capsule etched in literal gold on a sapphire disk.
 
-**Image:** Disk photo with a callout to a single tile, magnified.
+**Image:** Disk photo, ideally with a callout to one magnified tile.
 
-**Link card subtitle:** 1,124 contributors. One disk. 500×500 1-bit tiles. Submissions open until May 24.
+**Link card subtitle:** 1,124 contributors. 500×500 1-bit tiles. Submissions close May 24.
 
 **Destination URL:** `https://southslopenano.com/pixel.html`
 
 **Target subs:** r/PixelArt, r/aseprite, r/pico8, r/IndieDev
 
-**Notes:** "Outlast everyone reading this" is the line that should
-stick. Pixel art people already work in 1-bit; the medium fit is
-obvious to them.
-
 ### Meta
 
-**Primary text:** Send us your pixel art. We'll etch it in gold on a real 29mm sapphire disk. 1-bit native, 500×500 — your work, in literal gold.
+**Primary text:** Send us your pixel art. We're making a tiny time capsule — 1,124 little pictures, etched in literal gold on a 29mm sapphire disk. Your work, sealed between sapphire layers, readable in the year 12,026.
 
 **Headline:** Pixel art, in literal gold
 
-**Description:** Sapphire-and-gold disk, May 24 deadline
+**Description:** Sapphire-and-gold time capsule. Submissions close May 24.
 
 **CTA:** Sign up
 
@@ -93,36 +86,30 @@ obvious to them.
 
 ---
 
-## Angle C — "A permanent record of what the internet was drawing" (HN / one-of-N / design crowd)
+## Angle C — "what the internet was drawing" (HN / one-of-N / archive audiences)
 
-Frame as cultural curation. For audiences that care about archives,
-artifacts, and the post-NFT-crash conversation about permanence.
+For the post-NFT-tasteful crowd and archive-minded readers. Pair this
+voice with a Show HN organic post.
 
 ### Reddit
 
-**Title:** We're curating 1,124 images for a permanent physical archive of what the internet was drawing in May 2026 — etched in gold on a sapphire disk.
+**Title:** A tiny time capsule of what the internet was drawing in May 2026 — etched in gold, sealed in sapphire.
 
-**Image:** Disk photo at full clarity (the gold-on-sapphire surface).
+**Image:** Disk photo at full clarity.
 
-**Link card subtitle:** Semiconductor lithography. 10,000-year lifespan. No software, no servers — just a microscope. Submit something cool.
+**Link card subtitle:** 1,124 contributors. Semiconductor lithography. Readable in the year 12,026. Submit something cool.
 
 **Destination URL:** `https://southslopenano.com/sapphire.html`
 
-**Target subs:** r/InternetIsBeautiful, r/SideProject, r/Aesthetic, r/Art, r/somethingimade
-
-**Notes:** Heavier on the artifact/archive language. Aimed at the
-"one-of-N collectors" audience from CLAUDE.md (Are.na, post-NFT
-tasteful crowd, HN-style design readers). Pairs naturally with a
-Show HN post written in the same voice if Josh wants to do that
-organic in parallel.
+**Target subs:** r/InternetIsBeautiful, r/SideProject, r/Aesthetic, r/Art
 
 ### Meta
 
-**Primary text:** A permanent physical archive of what the internet was drawing in May 2026 — etched in gold on a sapphire disk that won't need the internet to be read in the year 12,026. 1,124 contributors. Submit something cool.
+**Primary text:** A tiny time capsule of what the internet was drawing in May 2026 — etched in literal gold on a sapphire disk that won't need software or servers to be read in the year 12,026. 1,124 contributors. Submissions close May 24.
 
-**Headline:** A 10,000-year sapphire archive
+**Headline:** A 10,000-year sapphire time capsule
 
-**Description:** Semiconductor lithography. Submissions close May 24.
+**Description:** 1,124 contributors. Submit something cool.
 
 **CTA:** Sign up
 
@@ -130,19 +117,30 @@ organic in parallel.
 
 ---
 
+## Live deployment status (as of 2026-05-17)
+
+- **Reddit r/place wave** → updated to Angle B (pixel art).
+- **Reddit Scarcity wave** → updated to Angle A (general).
+- **Meta r/place wave** → updated to Angle B (pixel art).
+- **Meta Scarcity wave** → updated to Angle A (general).
+- Angle C held in reserve. Worth pairing with a Show HN organic post
+  before we burn paid spend on it.
+
+Daily ad-set budgets unchanged ($50/day Meta each, Reddit budgets
+unchanged from Phase 1).
+
+---
+
 ## Deployment notes
 
-- **Run one angle at a time per ad set** so we can read which angle/copy
-  is doing the work. Avoid auction-against-self.
-- **Start with Angle A** (general invitation) — broadest top-of-funnel,
-  cheapest to validate the new voice before specializing.
-- **Add Angle B** once we have a baseline. Pixel-art audiences have the
-  strongest natural fit and should produce the best click-to-submission
-  rate.
-- **Hold Angle C** for HN organic posting first (no paid spend). If the
-  Show HN lands well, then promote via paid in the same voice.
-- **Image:** all three angles can reuse `/disk-photo.jpg` for v1. Custom
-  imagery (e.g. magnified single tile, full-disk crop) is a v2 ask.
-- **Old creative files** at `copy/ads/reddit/angle-{1..4}-*.md` and
-  `copy/ads/meta/variants-for-phase2.md` are superseded but kept for
-  retrospective.
+- **One angle at a time per ad set.** Don't run multiple angles in
+  the same ad set; that's auctioning against ourselves.
+- **Start with Angle A** if pivoting a new ad set — it's the broadest
+  hook and the cheapest to validate the voice.
+- **Layer in Angle B** for any pixel-art-targeted ad set; the medium
+  fit makes the headline land harder.
+- **Hold Angle C for organic first.** If the Show HN lands well, then
+  pay to amplify in the same voice.
+- All three angles can use `/disk-photo.jpg` as the image asset for
+  v1. Custom imagery (magnified single tile, full-disk crop, "spread
+  on a desk" lifestyle shot) is a v2 ask.
