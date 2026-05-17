@@ -79,7 +79,7 @@ def body_block(alias: str) -> str:
       </div>
 
       <label class="email-row">
-        <span class="email-label">Your email <span class="muted">(optional &mdash; we'll let you know if your tile makes the cut)</span></span>
+        <span class="email-label">Your email <span class="muted">(optional &mdash; no spam, just a couple of updates like where to find your image on the fabricated disk)</span></span>
         <input type="email" name="email" placeholder="you@example.com" autocomplete="email">
       </label>
 
