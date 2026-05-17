@@ -162,7 +162,7 @@ def patch_css(text: str) -> str:
 
 # ---------- 2. Body content ----------
 def body_block(alias: str) -> str:
-    return f"""<h2>Claim a tile.</h2>
+    return f"""<h2>Upload a tile.</h2>
     <p>Drop or pick any image. We'll convert it to 500×500 black-and-white right here in your browser, show you the preview, and etch <em>that exact image</em> on the disk in gold. Free.</p>
 
     <form id="claim-form" class="claim-form" enctype="multipart/form-data">
@@ -204,7 +204,7 @@ def body_block(alias: str) -> str:
 # to the divider <hr>. Captures both the original mailto layout AND
 # any prior form layout (for re-run idempotency).
 BODY_REGION_RE = re.compile(
-    r'<h2>Claim a tile\.</h2>[\s\S]*?(?=<hr class="divider">)',
+    r'<h2>(?:Claim|Upload) a tile\.</h2>[\s\S]*?(?=<hr class="divider">)',
     re.MULTILINE,
 )
 
@@ -338,7 +338,7 @@ JS_BLOCK = """
         } else if (!r.ok || !data.ok) {
           status.textContent = "Something went wrong (" + (data.error || r.status) + "). Try again in a minute.";
         } else {
-          form.innerHTML = "<p class='success'>Got it. Your tile is in the queue. Thank you.</p>";
+          form.innerHTML = "<p class='success'>Got it &mdash; your tile is in the queue. We'll review it before file-lock on May 24. Thank you.</p>";
           if (window.trackEvent) window.trackEvent("upload:success:" + source);
           return;
         }

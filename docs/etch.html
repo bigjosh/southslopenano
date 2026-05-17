@@ -259,7 +259,7 @@
       File locks on <span class="deadline">May 24, 2026</span>. After that the disk goes to fabrication and the contents are permanent.
     </p>
 
-    <h2>Claim a tile.</h2>
+    <h2>Upload a tile.</h2>
     <p>Drop or pick any image. We'll convert it to 500×500 black-and-white right here in your browser, show you the preview, and etch <em>that exact image</em> on the disk in gold. Free.</p>
 
     <form id="claim-form" class="claim-form" enctype="multipart/form-data">
@@ -483,7 +483,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
         } else if (!r.ok || !data.ok) {
           status.textContent = "Something went wrong (" + (data.error || r.status) + "). Try again in a minute.";
         } else {
-          form.innerHTML = "<p class='success'>Got it. Your tile is in the queue. Thank you.</p>";
+          form.innerHTML = "<p class='success'>Got it &mdash; your tile is in the queue. We'll review it before file-lock on May 24. Thank you.</p>";
           if (window.trackEvent) window.trackEvent("upload:success:" + source);
           return;
         }
