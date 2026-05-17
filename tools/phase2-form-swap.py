@@ -76,7 +76,7 @@ CSS_BLOCK = """
   max-width: 300px;
   height: auto;
   image-rendering: pixelated;
-  background: #fff;
+  background: #000;
   border-radius: 4px;
 }
 .preview-controls {
@@ -270,11 +270,14 @@ JS_BLOCK = """
     for (let i = 0, p = 0; i < d.length; i += 4, p++) {
       lum[p] = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
     }
+    // Floyd-Steinberg dither — always nearest-target. Invert is applied
+    // at writeback, not here, because picking the *far* target breaks
+    // error-diffusion math (errors snowball).
     for (let y = 0; y < H; y++) {
       for (let x = 0; x < W; x++) {
         const p = y * W + x;
         const old = lum[p];
-        const target = inverted ? (old < 128 ? 255 : 0) : (old < 128 ? 0 : 255);
+        const target = old < 128 ? 0 : 255;
         const err = old - target;
         lum[p] = target;
         if (x + 1 < W)        lum[p + 1]     += err * 7 / 16;
@@ -285,9 +288,13 @@ JS_BLOCK = """
         }
       }
     }
+    // Writeback: gold-on-black, with optional invert. Gold = (212,175,55).
     for (let i = 0, p = 0; i < d.length; i += 4, p++) {
-      const v = lum[p] >= 128 ? 255 : 0;
-      d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255;
+      let lit = lum[p] >= 128;
+      if (inverted) lit = !lit;
+      if (lit) { d[i] = 212; d[i + 1] = 175; d[i + 2] = 55; }
+      else     { d[i] = 0;   d[i + 1] = 0;   d[i + 2] = 0;  }
+      d[i + 3] = 255;
     }
     ctx.putImageData(img, 0, 0);
     canvas.hidden = false;

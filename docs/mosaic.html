@@ -173,7 +173,7 @@
   max-width: 300px;
   height: auto;
   image-rendering: pixelated;
-  background: #fff;
+  background: #000;
   border-radius: 4px;
 }
 .preview-controls {
@@ -421,7 +421,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       for (let x = 0; x < W; x++) {
         const p = y * W + x;
         const old = lum[p];
-        const target = inverted ? (old < 128 ? 255 : 0) : (old < 128 ? 0 : 255);
+        const target = old < 128 ? 0 : 255;
         const err = old - target;
         lum[p] = target;
         if (x + 1 < W)        lum[p + 1]     += err * 7 / 16;
@@ -433,8 +433,11 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       }
     }
     for (let i = 0, p = 0; i < d.length; i += 4, p++) {
-      const v = lum[p] >= 128 ? 255 : 0;
-      d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255;
+      let lit = lum[p] >= 128;
+      if (inverted) lit = !lit;
+      if (lit) { d[i] = 212; d[i + 1] = 175; d[i + 2] = 55; }
+      else     { d[i] = 0;   d[i + 1] = 0;   d[i + 2] = 0;  }
+      d[i + 3] = 255;
     }
     ctx.putImageData(img, 0, 0);
     canvas.hidden = false;
