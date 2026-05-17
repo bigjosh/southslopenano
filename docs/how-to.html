@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to make a great Mosaic tile</title>
+  <meta name="description" content="Mosaic tiles are 500×500 pixels, 1-bit black-and-white. Here's how to make one that looks good etched in gold.">
+  <meta name="referrerpolicy" content="no-referrer">
+
+  <meta property="og:title" content="How to make a great Mosaic tile">
+  <meta property="og:description" content="Mosaic tiles are 500×500 pixels, 1-bit black-and-white. Here's how to make one that looks good etched in gold.">
+  <meta property="og:image" content="https://southslopenano.com/disk-photo.jpg">
+  <meta property="og:url" content="https://southslopenano.com/how-to.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a;
+      --fg: #f1f1f1;
+      --muted: #a8a8a8;
+      --soft: #e6e6e6;
+      --accent: #00ffff;
+      --border: #333;
+    }
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      font-size: 18px;
+    }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      line-height: 1.6;
+      font-size: 1.25rem;
+    }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+    h1 {
+      font-size: clamp(2.25rem, 7vw, 3.25rem);
+      letter-spacing: -0.02em;
+      margin: 0 0 12px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    h2 {
+      font-size: 1.5rem;
+      letter-spacing: -0.01em;
+      margin: 36px 0 10px;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+    h3 {
+      font-size: 1.125rem;
+      margin: 22px 0 6px;
+      font-weight: 600;
+    }
+    p { margin: 0 0 16px; }
+    ul, ol { padding-left: 24px; margin: 0 0 18px; }
+    ul li, ol li { margin-bottom: 10px; color: var(--soft); line-height: 1.55; }
+    a { color: var(--accent); }
+    a:hover { opacity: 0.85; }
+    code {
+      background: #1a1a1a;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.92em;
+    }
+    pre {
+      background: #1a1a1a;
+      padding: 14px 16px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      margin: 0 0 18px;
+    }
+    pre code { background: none; padding: 0; }
+    .tagline {
+      font-size: 1.25rem;
+      color: var(--muted);
+      margin: 0 0 28px;
+      line-height: 1.45;
+    }
+    .breadcrumb {
+      font-size: 1rem;
+      color: var(--muted);
+      margin: 0 0 18px;
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .cta-wrap { text-align: center; margin: 36px 0 12px; }
+    .cta-button {
+      display: inline-block;
+      padding: 16px 32px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      font-size: 1.15rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 4px;
+      font-family: inherit;
+      text-decoration: none;
+    }
+    .cta-button:hover { opacity: 0.9; }
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 36px 0;
+    }
+    footer {
+      margin-top: 56px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 1rem;
+      text-align: center;
+    }
+    .callout {
+      background: #141414;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 4px;
+      margin: 0 0 22px;
+      font-size: 1.05rem;
+    }
+    .callout p { margin: 0; }
+    @media (max-width: 520px) {
+      main { padding: 24px 14px 40px; }
+      h2 { margin: 28px 0 8px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="breadcrumb"><a href="/mosaic.html">← Mosaic</a></p>
+
+    <h1>How to make a great tile</h1>
+    <p class="tagline">Mosaic tiles are 500 × 500 pixels and <em>1-bit</em> — every pixel is either pure black or pure white. Here's how to make one that looks good etched in gold.</p>
+
+    <div class="callout">
+      <p><strong>Short version:</strong> send any image to our form and it'll be converted for you. Read on if you want better-than-default results.</p>
+    </div>
+
+    <h2>Why 1-bit?</h2>
+    <p>The disk is etched: every spot on the surface is either gold or not gold. There is no gray. Each tile ends up about half a millimeter across on the finished disk, so what you submit gets resolved as 500 × 500 hard pixels.</p>
+    <p>This sounds limiting, and it is — but it's also why some kinds of images come out looking great. The constraint rewards bold, graphic, high-contrast subjects. Anything that survives being printed in a black-and-white zine will work here.</p>
+
+    <h2>The two paths</h2>
+
+    <h3>1. Send any image, let us convert it.</h3>
+    <p>Our submission form will take any image in any format and convert it to 500 × 500 1-bit using <a href="https://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering" target="_blank" rel="noopener">Floyd-Steinberg dithering</a>. You'll see exactly what we'd etch <em>before</em> you commit. There's an "invert colors" button if it comes out the wrong polarity. If you don't like the result, pick a different image — or jump to path 2 for full control.</p>
+
+    <h3>2. Convert it yourself, send the result.</h3>
+    <p>For best results, prepare your image in your own tool. We'll trust whatever 500 × 500 PNG you send and skip the auto-conversion. Tools below.</p>
+
+    <h2>What works well</h2>
+    <p>Some subjects thrive in this format:</p>
+    <ul>
+      <li><strong>Pixel art.</strong> Usually already monochrome or close to it. Resize to 500 × 500 with nearest-neighbor scaling and you're done.</li>
+      <li><strong>Line art and pen sketches.</strong> High-contrast drawings convert cleanly with simple thresholding — no dithering needed.</li>
+      <li><strong>Logos and bold typography.</strong> Hard edges look identical in 1-bit as in color. Use heavy weights for any text; thin fonts get eaten.</li>
+      <li><strong>Comics and cartoons.</strong> The 1-bit limitation lines up with the medium's natural look.</li>
+      <li><strong>High-contrast photos.</strong> Portraits in stark side-lighting, silhouettes against sky, anything with clear figure/ground separation. Dithering handles the midtones reasonably well.</li>
+      <li><strong>Patterns and geometric designs.</strong> Tilings, mandalas, ASCII-style art — all great fits.</li>
+    </ul>
+
+    <h2>What's hard</h2>
+    <p>Some subjects don't translate well:</p>
+    <ul>
+      <li><strong>Soft photos with subtle gradients</strong> — sunsets, faces in even light, foggy landscapes. The dithering creates noise and the subject often disappears into texture.</li>
+      <li><strong>Fine printed text.</strong> Type smaller than about 30 px tall in your source becomes mush. Use bold or extra-bold weights, large sizes, and prefer geometric over decorative typefaces.</li>
+      <li><strong>Anti-aliased screenshots.</strong> Fonts and shapes from screen captures have soft edges that turn jagged. Re-create the content in a 1-bit-native tool if you can.</li>
+      <li><strong>Images that depend on color for meaning.</strong> A red apple on a green background becomes one black blob when desaturated. Pick subjects whose intent survives a value-only world.</li>
+    </ul>
+
+    <h2>Tips for any approach</h2>
+    <ul>
+      <li><strong>Crop to square first.</strong> Otherwise we center-crop for you, which may drop something important.</li>
+      <li><strong>Boost contrast in your editor</strong> before dithering. It dramatically improves how the conversion reads.</li>
+      <li><strong>Skip the thick black border.</strong> It just eats pixels you could be using.</li>
+      <li><strong>Think of the output as half a millimeter wide.</strong> Fine details disappear at that scale; bold shapes survive. If you can't recognize your image when zoomed out to a thumbnail, the etched version won't fare better.</li>
+      <li><strong>When in doubt, send it and see the preview.</strong> The form lets you iterate without committing.</li>
+    </ul>
+
+    <h2>Tools for doing it yourself</h2>
+
+    <h3>Online (no install)</h3>
+    <ul>
+      <li><a href="https://dither.it/" target="_blank" rel="noopener">dither.it</a> — browser-based, several dithering algorithms to compare.</li>
+      <li><a href="https://lospec.com/dithering-tools" target="_blank" rel="noopener">Lospec dithering tools</a> — pixel-art focused.</li>
+    </ul>
+
+    <h3>Photoshop</h3>
+    <ol>
+      <li>Open your image.</li>
+      <li><code>Image → Adjustments → Levels</code> — boost contrast.</li>
+      <li><code>Image → Image Size</code> — set to 500 × 500 px.</li>
+      <li><code>Image → Mode → Grayscale</code>, then <code>Image → Mode → Bitmap</code>.</li>
+      <li>Pick a method: "50% Threshold" for hard edges and clean text, "Diffusion Dither" for photographic content, "Halftone Screen" for newspaper-style effects.</li>
+      <li>Export as PNG.</li>
+    </ol>
+
+    <h3>GIMP (free)</h3>
+    <ol>
+      <li><code>Image → Scale Image</code> — 500 × 500.</li>
+      <li><code>Image → Mode → Grayscale</code>.</li>
+      <li><code>Image → Mode → Indexed</code> with "Use black and white (1-bit) palette" and pick a dithering option (Floyd-Steinberg works well for photos; no dither is best for line art).</li>
+      <li>Export as PNG.</li>
+    </ol>
+
+    <h3>ImageMagick (command line)</h3>
+    <pre><code># Simple threshold — best for line art, logos, text:
+magick input.jpg -resize "500x500^" -gravity center \
+  -extent 500x500 -monochrome out.png
+
+# Floyd-Steinberg dither — what our form does. Best for photos:
+magick input.jpg -resize "500x500^" -gravity center \
+  -extent 500x500 -colorspace gray \
+  -dither FloydSteinberg -monochrome out.png
+
+# Ordered (Bayer) dither — better for gradients and skies:
+magick input.jpg -resize "500x500^" -gravity center \
+  -extent 500x500 -colorspace gray \
+  -ordered-dither 4x4 out.png</code></pre>
+
+    <h2>A note on dithering vs threshold</h2>
+    <p>If your image is already mostly black and white (line art, logos, comic panels), use a <strong>simple threshold</strong> — it gives you clean edges and no noise. If your image has lots of midtones (photos, paintings, gradients), use <strong>dithering</strong> — it spreads the midtones across nearby pixels in a noisy pattern that simulates gray. The two look very different and one usually wins clearly for any given image. If you're not sure, try both.</p>
+
+    <hr class="divider">
+
+    <p class="cta-wrap"><a class="cta-button" href="/mosaic.html">Back to submit a tile →</a></p>
+
+    <footer>
+      South Slope Nano Devices, LLC
+    </footer>
+  </main>
+
+<!-- Default Statcounter code for SSN
+https://southslopenano.com/ -->
+<script type="text/javascript">
+var sc_project=13233744;
+var sc_invisible=1;
+var sc_security="be0b9727";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/13233744/0/be0b9727/1/"
+alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
+</body>
+</html>
