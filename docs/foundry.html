@@ -246,21 +246,28 @@
 <body>
   <main>
     <h1>Mosaic</h1>
-    <p class="tagline">A 29mm sapphire disk, etched in gold by semiconductor lithography. 1,124 tiles. One physical run.</p>
+    <p class="tagline">A 29mm sapphire disk, etched in gold by semiconductor lithography. 1,124 contributors, one disk.</p>
 
-    <img src="/disk-photo.jpg" alt="The Mosaic disk — a 29mm sapphire wafer with gold-etched contents, held in a gloved hand" class="hero-img">
+    <img src="/disk-photo.jpg" alt="The Mosaic disk &mdash; a 29mm sapphire wafer with gold-etched contents, held in a gloved hand" class="hero-img">
 
     <p class="counter">
-      <span class="filled" id="filled-count">…</span> of 1,124 tiles filled.
-      <span id="remaining-count">…</span> remain.
+      <span class="filled" id="filled-count">&hellip;</span> of 1,124 tiles filled.
+      <span id="remaining-count">&hellip;</span> remain.
     </p>
 
     <p class="deadline-line">
-      File locks on <span class="deadline">May 24, 2026</span>. After that the disk goes to fabrication and the contents are permanent.
+      File locks on <span class="deadline">May 24, 2026</span>. After that the disk goes to fabrication.
     </p>
 
-    <h2>Upload a tile.</h2>
-    <p>Drop or pick any image. We'll convert it to 500×500 black-and-white right here in your browser, show you the preview, and etch <em>that exact image</em> on the disk in gold. Free.</p>
+    <h2>Already on the disk</h2>
+    <p class="fine center">Some of what people have already sent in.</p>
+    <div id="tile-gallery" class="tile-grid"></div>
+    <p class="center"><button id="more-tiles" type="button" class="btn-link">Show 9 more &rarr;</button></p>
+
+    <h2>Submit a tile.</h2>
+    <p>We're curating 1,124 little pictures for a sapphire disk we're fabricating this May. Looking for cool stuff &mdash; pixel art, sketches, drawings, photos, anything that reads as 500&times;500 black-and-white.</p>
+
+    <p>Tiles are <strong>500&times;500 pixels, 1-bit</strong> (pure black or white, no gray). Drop any image and we'll convert it for you, or <a href="/how-to.html">prepare your own</a> if you want full control.</p>
 
     <form id="claim-form" class="claim-form" enctype="multipart/form-data">
       <input type="hidden" name="source" value="foundry">
@@ -277,37 +284,31 @@
       </div>
 
       <label class="email-row">
-        <span class="email-label">Your email <span class="muted">(optional &mdash; we'll send a confirmation)</span></span>
+        <span class="email-label">Your email <span class="muted">(optional &mdash; we'll let you know if your tile makes the cut)</span></span>
         <input type="email" name="email" placeholder="you@example.com" autocomplete="email">
       </label>
 
       <p class="cta-wrap">
-        <button type="submit" class="cta-button" id="submit-btn" disabled>Add my tile</button>
+        <button type="submit" class="cta-button" id="submit-btn" disabled>Submit my tile</button>
       </p>
       <p class="fine center" id="claim-status" aria-live="polite"></p>
     </form>
 
-    <p class="fine">Want the physical disk after fabrication? Each contributor can buy one for $150 &mdash; but your image goes on the disk either way. Every buyer gets an identical disk with your image and everyone else's.</p>
-
-    <h2>Already on the disk</h2>
-    <p class="fine center">A few of the tiles people have added so far.</p>
-    <div id="tile-gallery" class="tile-grid"></div>
-    <p class="center"><button id="more-tiles" type="button" class="btn-link">Show 9 more &rarr;</button></p>
+    <p class="fine">We review every submission before fabrication. Be cool and creative &mdash; anything we wouldn't want next to our own image gets bounced.</p>
 
     <hr class="divider">
 
-    <h2>What's actually happening</h2>
-    <p>South Slope Nano Devices is fabricating one run of a 29mm sapphire disk. Each tile is a 500×500 monochrome bitmap. The bitmaps are etched in gold using the same semiconductor lithography used to make microchips. The result is too small to read with the naked eye — you can see something is etched on the disk, but the individual tiles need a microscope.</p>
+    <h2>What this actually is</h2>
+    <p>Semiconductor lithography &mdash; the same process that makes microchips &mdash; but instead of circuits, we're etching pictures. The result is a 29mm sapphire wafer with up to 1,124 little tiles, each one pure gold on the surface. The tiles are about half a millimeter wide &mdash; too small to read with the naked eye, but big in aggregate.</p>
 
-    <p>The full-resolution contents always live publicly at <a href="https://mosaic.southslopenano.com" target="_blank" rel="noopener">mosaic.southslopenano.com</a>. That's the canonical way to read what's on the disk. The physical object is the souvenir.</p>
+    <p>The disk doesn't need electricity, software, or an internet connection to be read &mdash; just a microscope. Sapphire and gold both age extremely well; we expect the disks to be around for the next 10,000 years.</p>
 
-    <h2>Honest notes</h2>
-    <ul>
-      <li>The disk is too small to read with the naked eye. Get a microscope, or use the public viewer.</li>
-      <li>The public viewer at <a href="https://mosaic.southslopenano.com" target="_blank" rel="noopener">mosaic.southslopenano.com</a> is permanent — your image lives there regardless of whether you buy a disk. Don't upload anything you wouldn't be comfortable being seen forever. We also expect the physical disks to be around for the next 10,000 years.</li>
-      <li>Be cool and creative. We review every upload before fabrication. Anything we wouldn't want next to our own image gets bounced.</li>
-      <li>Hard cap of 1,124 tiles. When May 24 hits, the file locks. Then never again from this team.</li>
-    </ul>
+    <p>The full-resolution contents also live permanently at <a href="https://mosaic.southslopenano.com" target="_blank" rel="noopener">mosaic.southslopenano.com</a>, but the disk is the canonical record. It's a small, permanent snapshot of what people online were drawing in May 2026.</p>
+
+    <h2>Want to own one?</h2>
+    <p>Each contributor can buy a finished disk for $150. Your tile is on it, along with everyone else's &mdash; every disk is identical. We're fabricating a small batch; once they're gone they're gone. It's the closest most people will ever get to seeing semiconductor lithography up close.</p>
+
+    <p class="cta-wrap"><a class="cta-button" href="https://buy.stripe.com/6oU6oG1Wu0dX3zs0BD7ok08" target="_blank" rel="noopener">Buy a disk &mdash; $150</a></p>
 
     <footer>
       South Slope Nano Devices, LLC
@@ -483,7 +484,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
         } else if (!r.ok || !data.ok) {
           status.textContent = "Something went wrong (" + (data.error || r.status) + "). Try again in a minute.";
         } else {
-          form.innerHTML = "<p class='success'>Got it &mdash; your tile is in the queue. We'll review it before file-lock on May 24. Thank you.</p>";
+          form.innerHTML = "<p class='success'>Got it &mdash; your submission is in the queue. We'll review it before file-lock on May 24 and let you know if you left an email. Thank you for contributing.</p>";
           if (window.trackEvent) window.trackEvent("upload:success:" + source);
           return;
         }
