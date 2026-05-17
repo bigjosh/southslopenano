@@ -70,6 +70,7 @@ def body_block(alias: str) -> str:
       <p id="dropzone-label" class="fine center" style="margin: 0 0 10px;">Drop an image here, or click to pick one.</p>
       <label class="dropzone" id="dropzone">
         <input type="file" accept="image/*" hidden id="file-input">
+        <span class="dropzone-plus" aria-hidden="true">+</span>
         <canvas id="preview-canvas" width="500" height="500" hidden></canvas>
       </label>
 

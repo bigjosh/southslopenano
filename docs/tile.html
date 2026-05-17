@@ -157,6 +157,14 @@
   transition: border-color .15s, background .15s;
 }
 .dropzone.over { border-color: var(--accent); background: #122; }
+.dropzone-plus {
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--border);
+  font-weight: 300;
+  user-select: none;
+}
+.dropzone:has(canvas:not([hidden])) .dropzone-plus { display: none; }
 .dropzone:hover { border-color: var(--accent); }
 #dropzone-label { color: var(--muted); font-size: 1rem; }
 #preview-canvas {
@@ -275,6 +283,7 @@
       <p id="dropzone-label" class="fine center" style="margin: 0 0 10px;">Drop an image here, or click to pick one.</p>
       <label class="dropzone" id="dropzone">
         <input type="file" accept="image/*" hidden id="file-input">
+        <span class="dropzone-plus" aria-hidden="true">+</span>
         <canvas id="preview-canvas" width="500" height="500" hidden></canvas>
       </label>
 

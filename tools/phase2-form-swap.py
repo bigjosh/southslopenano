@@ -60,6 +60,14 @@ CSS_BLOCK = """
   transition: border-color .15s, background .15s;
 }
 .dropzone.over { border-color: var(--accent); background: #122; }
+.dropzone-plus {
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--border);
+  font-weight: 300;
+  user-select: none;
+}
+.dropzone:has(canvas:not([hidden])) .dropzone-plus { display: none; }
 .dropzone:hover { border-color: var(--accent); }
 #dropzone-label { color: var(--muted); font-size: 1rem; }
 #preview-canvas {
